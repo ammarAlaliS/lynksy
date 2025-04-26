@@ -1,11 +1,17 @@
 import { Stack } from "expo-router";
 import "./globals.css";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "@/store";
+import React from "react";
+import StatusBarWithTheme from "@/components/statusBar";
+
+
+
 
 export default function RootLayout() {
   return (
     <Provider store={store}>
+      <StatusBarWithTheme />
       <Stack>
         <Stack.Screen
           name="(tabs)"
@@ -15,3 +21,4 @@ export default function RootLayout() {
     </Provider>
   );
 }
+

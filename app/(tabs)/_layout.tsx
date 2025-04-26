@@ -64,7 +64,7 @@ const SwipeTabs = () => {
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: "center",
-        backgroundColor: themeColors.backgroundMenu, // Dynamically change background color based on theme
+        backgroundColor: themeColors.background, // Dynamically change background color based on theme
    
         height: 56,
         borderTopWidth: 1,

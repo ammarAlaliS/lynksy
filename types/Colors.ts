@@ -4,15 +4,23 @@ import { ThemeColors } from "./ThemeColors";
 export const colors: { light: ThemeColors; dark: ThemeColors } = {
   light: {
     background: "#fff",
-    border: 'rgba(128, 128, 128, 0.9)',
+    border: 'rgba(128, 128, 128, 0.2)',
     backgroundMenu: '#706D54',
-    flastlistColor: '#686D76'
+    flastlistColor: '#686D76',
+    black:'#010101',
+    green: '#333',
+    gray: '#777',
+    white: '#fff'
   },
   dark: {
     background: "#000",
     border: 'rgba(128, 128, 128, 0.1)',
     backgroundMenu: '#030303',
-    flastlistColor: '#090909'
+    flastlistColor: '#090909',
+    black:'#010101',
+    green: '#22c55e',
+    gray: '#333',
+    white: '#000'
    
   },
 };
