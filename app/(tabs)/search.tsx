@@ -5,7 +5,13 @@ import { IndexProps } from '@/types/IndexProps'
 const search = ({ onScroll }: any) => {
   return (
     <View>
-      <Text>search</Text>
+      <Text 
+        style={{
+          justifyContent:'center',
+          alignItems:'center',
+          backgroundColor:'red'
+        }}
+      >search</Text>
     </View>
   )
 }

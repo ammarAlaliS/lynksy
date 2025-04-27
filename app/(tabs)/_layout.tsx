@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import { View, Dimensions, Image, TouchableOpacity } from "react-native";
+import { View, Dimensions, Image, TouchableOpacity, FlatList } from "react-native";
 import { TabView } from "react-native-tab-view";
 import { icons } from "@/constants/icons";
-import Home from "../home";
 import Saved from "./saved";
 import Search from "./search";
 import Profile from "./profile";
-import Index from ".";
+import HomeSection from "./home";
 import { useSelector } from "react-redux";
 import { selectTheme } from "@/store/slices/themeSlice";
 
 const TabIcon = ({ icon, focused, themeColors }: { icon: any; focused: boolean; themeColors: any }) => (
-  <View
-    style={{
-      borderRadius: 9999,
-      justifyContent: "center",
-      alignItems: "center",
-      padding:12
-    }}
-  >
+  <View style={{
+    borderRadius: 9999,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 12,
+  }}>
     <Image
       source={icon}
       style={{
-        width: 24, // You can adjust this size
-        height: 24, // You can adjust this size
+        width: 24,
+        height: 24,
         tintColor: focused ? themeColors.buttonBackground : themeColors.icon,
       }}
     />
@@ -32,7 +29,7 @@ const TabIcon = ({ icon, focused, themeColors }: { icon: any; focused: boolean; 
 
 const initialLayout = { width: Dimensions.get("window").width };
 
-const SwipeTabs = () => {
+const SwipeTabs = ({ handleScroll }: { handleScroll: (event: any) => void }) => {
   const [index, setIndex] = useState(0);
   const themeColors = useSelector(selectTheme);
 
@@ -46,35 +43,32 @@ const SwipeTabs = () => {
   const renderScene = ({ route }: any) => {
     switch (route.key) {
       case "home":
-        return <Index themeColors={themeColors} />;
+        return <HomeSection handleScroll={handleScroll} themeColors={themeColors} />;
       case "saved":
-        return <Saved themeColors={themeColors} />;
+        return <Saved onScroll={handleScroll} themeColors={themeColors} />;
       case "search":
-        return <Search themeColors={themeColors} />;
+        return <Search onScroll={handleScroll} themeColors={themeColors} />;
       case "profile":
-        return <Profile themeColors={themeColors} />;
+        return <Profile onScroll={handleScroll} themeColors={themeColors} />;
       default:
         return null;
     }
   };
 
   const renderTabBar = () => (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignItems: "center",
-        backgroundColor: themeColors.background, // Dynamically change background color based on theme
-   
-        height: 56,
-        borderTopWidth: 1,
-        borderColor: themeColors.border,
-        position:'absolute',
-        bottom:0,
-        left:0,
-        right:0
-      }}
-    >
+    <View style={{
+      flexDirection: "row",
+      justifyContent: "space-around",
+      alignItems: "center",
+      backgroundColor: themeColors.background,
+      height: 56,
+      borderTopWidth: 1,
+      borderColor: themeColors.border,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+    }}>
       {routes.map((route, i) => {
         const focused = index === i;
         return (

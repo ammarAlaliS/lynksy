@@ -6,7 +6,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the initial state with a boolean value for darkMode
 const initialState = {
-darkMode: false,
+darkMode: true,
 };
 
 // Create the theme slice with type-safe reducers

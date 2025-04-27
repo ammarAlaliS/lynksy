@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 
 const NotificationCounts = ({ themeColors, count }: any) => {
-    
+
   if (count === null || count === 0) {
     return null;
   }
@@ -10,18 +10,19 @@ const NotificationCounts = ({ themeColors, count }: any) => {
   return (
     <View
       style={{
-        minWidth: 20,
-        minHeight: 20,
+        minWidth: 22,
+        minHeight: 22,
         backgroundColor: 'red',
         position: 'absolute',
         top: -10,
         left: 16,
-        borderRadius: 9999,
-        borderWidth: 2,
-        borderColor: themeColors.white,
+        borderRadius: '50%',
+        borderWidth: 1,
+        borderColor: themeColors.background,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding:2
       }}
     >
       <Text

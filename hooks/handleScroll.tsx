@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
-export function useAnimatedHeader(initialOffset = 0, hideOffset = 54) {
+export function useAnimatedHeader(initialOffset = 0, hideOffset = 56) {
   const scrollY = useRef(new Animated.Value(0)).current;
   const lastScrollY = useRef(0);
   const headerTranslateY = useRef(new Animated.Value(initialOffset)).current;
@@ -32,8 +32,20 @@ export function useAnimatedHeader(initialOffset = 0, hideOffset = 54) {
     lastScrollY.current = currentY;
   };
 
+  const toggleHeader = (visible: boolean) => {
+    setShowHeader(visible);
+
+    Animated.timing(headerTranslateY, {
+      toValue: visible ? initialOffset : -hideOffset,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return {
     headerTranslateY,
     handleScroll,
+    setShowHeader: toggleHeader,
+    showHeader
   };
 }

@@ -10,17 +10,17 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     black:'#010101',
     green: '#333',
     gray: '#777',
-    white: '#fff'
+    white: '#333'
   },
   dark: {
-    background: "#000",
+    background: "#222",
     border: 'rgba(128, 128, 128, 0.1)',
     backgroundMenu: '#030303',
     flastlistColor: '#090909',
     black:'#010101',
     green: '#22c55e',
-    gray: '#333',
-    white: '#000'
+    gray: '#555',
+    white: '#fff'
    
   },
 };
