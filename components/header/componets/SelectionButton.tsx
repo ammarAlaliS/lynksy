@@ -21,7 +21,6 @@ const SelectionButton = ({themeColors}: any) => {
                         borderRadius: 999,
                         marginRight: index !== arr.length - 1 ? 8 : 0,
                     }}
-                    className=" font-bold"
                 >
                     <Text style={{ color: 'white' }}>{categoria}</Text>
                 </TouchableOpacity>
