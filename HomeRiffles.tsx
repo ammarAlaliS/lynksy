@@ -1,8 +1,9 @@
+
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 import { ProductCard, productos } from '@/components/Product'
 
-export default function HomeSection( {handleScroll, themeColors }: any) {
+const HomeRiffles = ({handleScroll , themeColors }: any) => {
   return (
     <FlatList
         data={productos}
@@ -11,7 +12,7 @@ export default function HomeSection( {handleScroll, themeColors }: any) {
         scrollEventThrottle={16}
         onScroll={handleScroll}
         contentContainerStyle={{
-          paddingTop: 84,
+          paddingTop: 20,
           paddingBottom: 64,
           backgroundColor: themeColors.background
         }}
@@ -25,3 +26,5 @@ export default function HomeSection( {handleScroll, themeColors }: any) {
       />
   )
 }
+
+export default HomeRiffles

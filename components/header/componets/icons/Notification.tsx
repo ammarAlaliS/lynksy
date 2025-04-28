@@ -3,13 +3,21 @@ import React from 'react'
 import Icons from '@/components/Icon'
 import NotificationCounts from '@/components/NotificationCounts'
 import { Icon } from 'react-native-elements'
+import { useNavigation } from 'expo-router'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '@/types/ScreenType'
 
+type NotificationIconNavigationProp = StackNavigationProp<RootStackParamList, 'Notificacion'>;
 
 const NotificationIcon = ({themeColors , setShowHeader, setTextTitle , setShowNotificationTitile}: any) => {
+  const navigation = useNavigation<NotificationIconNavigationProp>(); 
+
     const HandleOnpressSteps = (): void => { 
+
         setShowHeader(false);
         setTextTitle('Notificaciones');
         setShowNotificationTitile(true)
+        navigation.navigate('Notificacion');
       };
     return (
         <Icons
