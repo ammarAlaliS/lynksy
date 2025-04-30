@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
-export function useAnimatedHeader(initialOffset = 0, hideOffset = 56) {
+export function useAnimatedHeader(initialOffset = 0, hideOffset = 50) {
   const scrollY = useRef(new Animated.Value(0)).current;
   const lastScrollY = useRef(0);
   const headerTranslateY = useRef(new Animated.Value(initialOffset)).current;

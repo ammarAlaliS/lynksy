@@ -19,9 +19,7 @@ const Index = () => {
         themeColors={themeColors}
         showHeader={showHeader}
       />
-     
      <TabViewExample/>
-   
     </View>
   );
 };

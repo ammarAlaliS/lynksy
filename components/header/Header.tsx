@@ -27,7 +27,8 @@ const HeaderComponent = ({ headerTranslateY, themeColors, setShowHeader, showHea
                 borderBottomWidth: 1,
                 borderColor: themeColors.border,
                 paddingHorizontal: 16,
-                paddingVertical: 8
+                paddingVertical: 8,
+                height:100
             }}
         >
             <View
@@ -36,7 +37,7 @@ const HeaderComponent = ({ headerTranslateY, themeColors, setShowHeader, showHea
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    paddingVertical: 8
+                    height:42
                 }}
             >
                 <HeaderLogo themeColors={themeColors} />
@@ -45,7 +46,8 @@ const HeaderComponent = ({ headerTranslateY, themeColors, setShowHeader, showHea
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        gap: 8
+                        gap: 8,
+                     
                     }}
                 >
                     <ToggleMode themeColors={themeColors} />
@@ -65,6 +67,7 @@ const HeaderComponent = ({ headerTranslateY, themeColors, setShowHeader, showHea
             </View>
 
             <View style={{
+                height:42,
             }}>
                 {
                     showNoticationTitle

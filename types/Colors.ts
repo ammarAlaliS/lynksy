@@ -10,7 +10,8 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     black:'#010101',
     green: '#333',
     gray: '#777',
-    white: '#333'
+    white: '#333',
+    inactiveIconColor:'#888'
   },
   dark: {
     background: "#222",
@@ -20,7 +21,8 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     black:'#010101',
     green: '#22c55e',
     gray: '#555',
-    white: '#fff'
+    white: '#fff',
+    inactiveIconColor:'#666'
    
   },
 };

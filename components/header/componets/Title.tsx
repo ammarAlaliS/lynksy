@@ -3,12 +3,17 @@ import React from 'react'
 
 const HeaderTitle = ({title, themeColors}:any) => {
   return (
-    <View >
+    <View  style={{
+      height:50,
+      display:'flex',
+      justifyContent:'center'
+    }}>
       <Text style={{
         color: themeColors.green,
         fontSize: 30,
         lineHeight:36,
-        fontWeight:700
+        fontWeight:700,
+    
     }}>{title}</Text>
     </View>
   )
