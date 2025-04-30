@@ -55,7 +55,12 @@ const HeaderComponent = ({ headerTranslateY, themeColors, setShowHeader, showHea
                         setTextTitle={setTextTitle}
                         setShowNotificationTitile={setShowNotificationTitile}
                     />
-                    <SendIcon_c themeColors={themeColors} />
+                    <SendIcon_c 
+                         themeColors={themeColors}
+                         setShowHeader={setShowHeader}
+                         setTextTitle={setTextTitle}
+                         setShowNotificationTitile={setShowNotificationTitile}
+                    />
                 </View>
             </View>
 

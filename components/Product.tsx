@@ -72,5 +72,19 @@ export const productos: Producto[] = [
     precio: 899.99,
     imagen: icons.arrow,
     descripcion: "El último smartphone con cámara de 108MP y pantalla AMOLED"
+  },
+  {
+    id: 8,
+    nombre: "Smartphone Premium",
+    precio: 899.99,
+    imagen: icons.arrow,
+    descripcion: "El último smartphone con cámara de 108MP y pantalla AMOLED"
+  },
+  {
+    id: 9,
+    nombre: "Smartphone Premium",
+    precio: 899.99,
+    imagen: icons.arrow,
+    descripcion: "El último smartphone con cámara de 108MP y pantalla AMOLED"
   }
 ];

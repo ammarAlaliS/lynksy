@@ -1,8 +1,11 @@
+import { View, Text } from 'react-native'
 import React from 'react'
 
-function Saved() {
+const Saved = () => {
   return (
-    <div>Saved</div>
+    <View>
+      <Text>Saved</Text>
+    </View>
   )
 }
 
