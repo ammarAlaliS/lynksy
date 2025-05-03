@@ -1,24 +1,44 @@
-
 import Home from "./screens/home/Home";
 import Index from "./screens/Index";
-import { Stack } from "./utils/StackConfig";
-import Notification from './screens/notification/Notication'
+import Notification from './screens/notification/Notication';
+import { NativeStack, Stack } from "./utils/StackConfig";
+import { CardStyleInterpolators } from '@react-navigation/stack';
 
 export function StackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Index" component={Index} />
-      <Stack.Screen name="HomeRoute" component={HomeRoute} />
-    </Stack.Navigator>
+    <NativeStack.Navigator screenOptions={{ headerShown: false }}>
+      <NativeStack.Screen name="Index" component={Index} />
+      <NativeStack.Screen name="HomeRoute" component={HomeRoute} />
+    </NativeStack.Navigator>
   );
 }
 
 export function HomeRoute() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notification" component={Notification} />
+      
+     
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          gestureEnabled: true,
+          transitionSpec: {
+            open: {
+              animation: 'timing',
+              config: { duration: 500 },
+            },
+            close: {
+              animation: 'timing',
+              config: { duration: 500 },
+            },
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
     </Stack.Navigator>
-  )
+  );
 }
-
