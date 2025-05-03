@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -8,6 +8,7 @@ import Icons from '@/components/Icon';
 import NotificationCounts from '@/components/NotificationCounts';
 import { setTextTitle, setShowNotificationTitle } from '@/store/slices/headerSlice';
 import { useHeaderAnimation } from '@/context/HeaderAnimationContext'; 
+import { useNotificationNavigation } from '@/hooks/useNotificationNavigation';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'HomeRoute'>;
 
@@ -18,16 +19,16 @@ interface Props {
 const NotificationIcon = ({ themeColors }: Props) => {
   const navigation = useNavigation<NavigationProp>();
   const dispatch = useDispatch();
-  const { hideHeader } = useHeaderAnimation();
+  const { hideHeader, showHeader } = useHeaderAnimation();
 
   const handleOnPress = () => {
     hideHeader();
     dispatch(setTextTitle('Notificaciones'));
     dispatch(setShowNotificationTitle(true));
-    navigation.navigate('Notification');
+    navigation.navigate('Notification'); 
   };
 
-  
+  useNotificationNavigation();
 
   return (
     <Icons
