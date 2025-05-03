@@ -1,5 +1,6 @@
 // store/slices/headerSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Animated } from 'react-native';
 
 interface HeaderState {
   showHeader: boolean;
@@ -7,6 +8,7 @@ interface HeaderState {
   showNotificationTitle: boolean;
 }
 
+// ⚠️ No serializable pero funciona porque no lo persistes
 const initialState: HeaderState = {
   showHeader: true,
   textTitle: '',
@@ -29,7 +31,11 @@ const headerSlice = createSlice({
   },
 });
 
-export const { setShowHeader, setTextTitle, setShowNotificationTitle } = headerSlice.actions;
+export const {
+  setShowHeader,
+  setTextTitle,
+  setShowNotificationTitle,
+} = headerSlice.actions;
 
 export const selectHeader = (state: any) => state.header;
 

@@ -1,6 +1,6 @@
 // StackNavigator.tsx
 import Index from "./screens/Index";
-import Notification from './screens/notification/Notication';
+import NoticationScreen from "./screens/notification/NoticationScreen";
 import { NativeStack } from "./utils/StackConfig";
 
 export function StackNavigator() {
@@ -9,7 +9,7 @@ export function StackNavigator() {
       <NativeStack.Screen name="Index" component={Index} />
       <NativeStack.Screen
         name="Notification"
-        component={Notification}
+        component={NoticationScreen}
         options={{
           gestureEnabled: true,
           animation: 'slide_from_right',

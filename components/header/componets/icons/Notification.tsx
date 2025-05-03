@@ -2,33 +2,32 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@/types/ScreenType'; 
+import { useDispatch } from 'react-redux';
+import { RootStackParamList } from '@/types/ScreenType';
 import Icons from '@/components/Icon';
 import NotificationCounts from '@/components/NotificationCounts';
+import { setTextTitle, setShowNotificationTitle } from '@/store/slices/headerSlice';
+import { useHeaderAnimation } from '@/context/HeaderAnimationContext'; 
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'HomeRoute'>;
 
 interface Props {
   themeColors: any;
-  setShowHeader: (value: boolean) => void;
-  setTextTitle: (text: string) => void;
-  setShowNotificationTitile: (value: boolean) => void;
 }
 
-const NotificationIcon = ({
-  themeColors,
-  setShowHeader,
-  setTextTitle,
-  setShowNotificationTitile,
-}: Props) => {
+const NotificationIcon = ({ themeColors }: Props) => {
   const navigation = useNavigation<NavigationProp>();
+  const dispatch = useDispatch();
+  const { hideHeader } = useHeaderAnimation();
 
   const handleOnPress = () => {
-    setShowHeader(false);
-    setTextTitle('Notificaciones');
-    setShowNotificationTitile(true);
+    hideHeader();
+    dispatch(setTextTitle('Notificaciones'));
+    dispatch(setShowNotificationTitle(true));
     navigation.navigate('Notification');
   };
+
+  
 
   return (
     <Icons
@@ -42,18 +41,8 @@ const NotificationIcon = ({
         justifyContent: 'center',
         position: 'relative',
       }}
-      view={
-        <NotificationCounts
-          themeColors={themeColors.background}
-          count={1}
-        />
-      }
-      icon={
-        <Icon
-          name="notifications"
-          color={themeColors.background}
-        />
-      }
+      view={<NotificationCounts themeColors={themeColors.background} count={1} />}
+      icon={<Icon name="notifications" color={themeColors.background} />}
     />
   );
 };
