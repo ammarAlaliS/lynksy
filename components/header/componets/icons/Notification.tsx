@@ -27,7 +27,7 @@ const NotificationIcon = ({
     setShowHeader(false);
     setTextTitle('Notificaciones');
     setShowNotificationTitile(true);
-    navigation.navigate('HomeRoute', { screen: 'Notification' });
+    navigation.navigate('Notification');
   };
 
   return (

@@ -1,4 +1,5 @@
-import { View, Text } from 'react-native';
+// screens/Index.tsx
+import { View } from 'react-native';
 import React from 'react';
 import HeaderComponent from '@/components/header/Header';
 import { useAnimatedHeader } from '@/hooks/handleScroll';
@@ -9,7 +10,6 @@ import CustomTabBar from '@/components/tab/CustomTabBar';
 import { setIndex } from '@/store/slices/tabIndexSlice';
 import RenderScreen from '@/components/tab/RenderScreen';
 import { useGlobalStyles } from './global_screen_styles/Style_global';
-
 
 const Index = () => {
   const { headerTranslateY, setShowHeader, showHeader } = useAnimatedHeader();
@@ -25,9 +25,7 @@ const Index = () => {
         themeColors={themeColors}
         showHeader={showHeader}
       />
-      {/* aqui es donde se renderizan las pantallas y si abre una nueva no deberia de perder el layout, si yo navego hacia notificacion
-      no deberia de perder el layout la pantalla se deberia de renderizar en este view el problema esta que al navegar a notificaciones me
-      abre una nueva pnatalla completa y pierdo el header y el customBar */}
+      {/* Aquí se renderizan las pantallas dentro del layout */}
       <View style={globalTabStyle.container}>
         <RenderScreen
           index={index}
@@ -35,8 +33,7 @@ const Index = () => {
         />
       </View>
 
-
-      {/* aqui esta el menu de navegacion */}
+      {/* Barra de navegación inferior */}
       <CustomTabBar
         index={index}
         setIndex={setIndex}
