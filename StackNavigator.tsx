@@ -1,16 +1,24 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Home from "./screens/home/Home";
 import Index from "./screens/Index";
-import Saved from "./screens/Saved";
-import Profile from "./screens/Profile";
+import { Stack } from "./utils/StackConfig";
+import Notification from './screens/notification/Notication'
 
-const Stack = createNativeStackNavigator();
-
-export default function StackNavigator() {
+export function StackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Index" component={Index} />
-      <Stack.Screen name="Saved" component={Saved} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="HomeRoute" component={HomeRoute} />
     </Stack.Navigator>
   );
 }
+
+export function HomeRoute() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Notification" component={Notification} />
+    </Stack.Navigator>
+  )
+}
+

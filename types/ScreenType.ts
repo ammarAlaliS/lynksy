@@ -1,8 +1,6 @@
 export type RootStackParamList = {
-  Home: {
-    handleScroll: any; 
-    themeColors: any;   
+  Index: undefined;
+  HomeRoute: {
+    screen: 'Home' | 'Notification';
   };
-  Notificacion: undefined;
-
 };

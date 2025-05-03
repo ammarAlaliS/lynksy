@@ -24,7 +24,6 @@ export const useGlobalStyles = () => {
     },
   });
 
-  // Retornamos estilos + colores planos
   return {
     ...styles,
     activeIconColor: themeColors.white,

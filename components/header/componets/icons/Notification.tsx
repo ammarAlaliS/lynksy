@@ -1,50 +1,61 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Icons from '@/components/Icon'
-import NotificationCounts from '@/components/NotificationCounts'
-import { Icon } from 'react-native-elements'
-import { useNavigation } from 'expo-router'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList } from '@/types/ScreenType'
+import React from 'react';
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '@/types/ScreenType'; 
+import Icons from '@/components/Icon';
+import NotificationCounts from '@/components/NotificationCounts';
 
+type NavigationProp = StackNavigationProp<RootStackParamList, 'HomeRoute'>;
 
-const NotificationIcon = ({themeColors , setShowHeader, setTextTitle , setShowNotificationTitile}: any) => {
-
-    const HandleOnpressSteps = (): void => { 
-
-        setShowHeader(false);
-        setTextTitle('Notificaciones');
-        setShowNotificationTitile(true)
-      };
-    return (
-        <Icons
-            onPress={() => HandleOnpressSteps()}
-            style={{
-                backgroundColor: themeColors.green,
-                width: 32,
-                height: 32,
-                borderRadius: 9999,
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-            }}
-            view={
-                <NotificationCounts
-                    themeColors={themeColors.background}
-                    count={1}
-                />
-            }
-            icon={
-                <Icon
-                    name='notifications'
-                    color={themeColors.background}
-                    type=""
-                />
-
-            }
-
-        />
-    )
+interface Props {
+  themeColors: any;
+  setShowHeader: (value: boolean) => void;
+  setTextTitle: (text: string) => void;
+  setShowNotificationTitile: (value: boolean) => void;
 }
 
-export default NotificationIcon
+const NotificationIcon = ({
+  themeColors,
+  setShowHeader,
+  setTextTitle,
+  setShowNotificationTitile,
+}: Props) => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleOnPress = () => {
+    setShowHeader(false);
+    setTextTitle('Notificaciones');
+    setShowNotificationTitile(true);
+    navigation.navigate('HomeRoute', { screen: 'Notification' });
+  };
+
+  return (
+    <Icons
+      onPress={handleOnPress}
+      style={{
+        backgroundColor: themeColors.green,
+        width: 32,
+        height: 32,
+        borderRadius: 9999,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+      }}
+      view={
+        <NotificationCounts
+          themeColors={themeColors.background}
+          count={1}
+        />
+      }
+      icon={
+        <Icon
+          name="notifications"
+          color={themeColors.background}
+        />
+      }
+    />
+  );
+};
+
+export default NotificationIcon;

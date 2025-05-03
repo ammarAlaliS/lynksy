@@ -1,9 +1,10 @@
 import { routes } from '@/routes/Routes';
 import { useGlobalStyles } from '@/screens/global_screen_styles/global_tab_styles';
-import HomeRoute from '@/screens/home/HomeRoute';
+
 import MarketRoute from '@/screens/market/MarketRoute';
 import SavedRoute from '@/screens/save/SavedRoute';
 import SettingsRoute from '@/screens/setting/SettingsRoute';
+import { HomeRoute } from '@/StackNavigator';
 import * as React from 'react';
 import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
