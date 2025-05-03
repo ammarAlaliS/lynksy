@@ -14,7 +14,7 @@ import { HomeRoute } from '@/StackNavigator';
 
 export default function RenderScreen( {index, setIndex}: any) {
   const layout = useWindowDimensions();
-  const globalTabStyle = useGlobalStyles();
+
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,6 @@ export default function RenderScreen( {index, setIndex}: any) {
   });
 
   return (
-    <View style={globalTabStyle.container}>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
@@ -34,6 +33,5 @@ export default function RenderScreen( {index, setIndex}: any) {
         initialLayout={{ width: layout.width }}
         renderTabBar={() => null}
       />
-    </View>
   );
 }
