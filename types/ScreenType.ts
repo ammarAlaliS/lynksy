@@ -1,5 +1,5 @@
 export type RootStackParamList = {
-  HomeRoute: { screen: 'Notification' | 'Home' }; 
-  Index: undefined; 
-  Notification: undefined; 
+  Notification: undefined;
+  MessageScreen: undefined;
+  Index: undefined;
 };

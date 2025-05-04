@@ -61,7 +61,10 @@ export const HeaderComponent = ({ themeColors }: any) => {
   
         <View style={{ height: 42 }}>
           {showNotificationTitle ? (
-            <HeaderTitle themeColors={themeColors} title={textTitle} />
+            <HeaderTitle 
+            themeColors={themeColors} 
+            title={textTitle} 
+            />
           ) : (
             <SelectionButton themeColors={themeColors} />
           )}

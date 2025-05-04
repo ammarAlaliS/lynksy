@@ -3,17 +3,26 @@ import React from 'react'
 import Icons from '@/components/Icon'
 import SendIcon from '@/icons/Send'
 import NotificationCounts from '@/components/NotificationCounts'
+import { useNavigation } from '@react-navigation/native'
+import { NavigationProp } from './Notification'
+import { useDispatch } from 'react-redux'
+import { useHeaderAnimation } from '@/context/HeaderAnimationContext'
+import { setShowNotificationTitle, setTextTitle } from '@/store/slices/headerSlice'
 
-const SendIcon_c = ({themeColors , setShowHeader, setTextTitle , setShowNotificationTitile}: any) => {
-    const HandleOnpressSteps = (): void => { 
-
-        setShowHeader(false);
-        setTextTitle('Mensajes');
-        setShowNotificationTitile(true)
-      };
+const SendIcon_c = ({themeColors}: any) => {
+    const navigation = useNavigation<NavigationProp>();
+    const dispatch = useDispatch();
+    const { hideHeader} = useHeaderAnimation();
+  
+    const handleOnPress = () => {
+      hideHeader();
+      dispatch(setTextTitle('Mensajes'));
+      dispatch(setShowNotificationTitle(true));
+      navigation.navigate('MessageScreen'); 
+    };
     return (
         <Icons
-            onPress={() => HandleOnpressSteps()}
+            onPress={() => handleOnPress()}
             icon={<SendIcon width={18} height={24} color={themeColors.background} />}
             style={{
                 backgroundColor: themeColors.green,
@@ -26,7 +35,7 @@ const SendIcon_c = ({themeColors , setShowHeader, setTextTitle , setShowNotifica
             view={
                 <NotificationCounts
                     themeColors={themeColors.background}
-                    count={0}
+                    count={10}
                 />
             }
         />

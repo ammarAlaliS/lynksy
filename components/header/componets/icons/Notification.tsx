@@ -10,7 +10,7 @@ import { setTextTitle, setShowNotificationTitle } from '@/store/slices/headerSli
 import { useHeaderAnimation } from '@/context/HeaderAnimationContext'; 
 import { useNotificationNavigation } from '@/hooks/useNotificationNavigation';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'HomeRoute'>;
+export type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 interface Props {
   themeColors: any;
@@ -19,7 +19,7 @@ interface Props {
 const NotificationIcon = ({ themeColors }: Props) => {
   const navigation = useNavigation<NavigationProp>();
   const dispatch = useDispatch();
-  const { hideHeader, showHeader } = useHeaderAnimation();
+  const { hideHeader} = useHeaderAnimation();
 
   const handleOnPress = () => {
     hideHeader();
