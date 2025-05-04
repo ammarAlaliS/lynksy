@@ -11,7 +11,12 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     green: '#333',
     gray: '#777',
     white: '#333',
-    inactiveIconColor:'#888'
+    inactiveIconColor:'#888',
+
+    // Icons 
+    text_icon_is_active: '#fff',
+    text_icon_is_not_active: '#fff',
+
   },
   dark: {
     background: "#222",
@@ -22,7 +27,11 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     green: '#22c55e',
     gray: '#555',
     white: '#fff',
-    inactiveIconColor:'#666'
+    inactiveIconColor:'#666',
+
+     // Icons 
+    text_icon_is_active: '#222',
+    text_icon_is_not_active: '#fff',
    
   },
 };

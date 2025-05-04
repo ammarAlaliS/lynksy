@@ -1,32 +1,65 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useRef, useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, LayoutChangeEvent } from 'react-native';
 
-const SelectionButton = ({themeColors}: any) => {
-    return (
-        <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{
+const initialCategories = ["Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
 
-                alignItems: 'center',
-            }}
+const SelectionButton = ({ themeColors }: any) => {
+  const [activeCategory, setActiveCategory] = useState(initialCategories[0]);
+  const scrollRef = useRef<ScrollView>(null);
+  const buttonPositions = useRef<Record<string, number>>({});
+
+  const handleLayout = (category: string) => (event: LayoutChangeEvent) => {
+    const { x } = event.nativeEvent.layout;
+    buttonPositions.current[category] = x;
+  };
+
+  const handlePress = (category: string) => {
+    setActiveCategory(category);
+
+    const buttonX = buttonPositions.current[category] || 0;
+
+    // Scroll animado hasta la posición del botón
+    scrollRef.current?.scrollTo({
+      x: buttonX,
+      animated: true,
+    });
+  };
+
+  return (
+    <ScrollView
+      ref={scrollRef}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
+    >
+      {initialCategories.map((categoria) => (
+        <TouchableOpacity
+          key={categoria}
+          onLayout={handleLayout(categoria)}
+          onPress={() => handlePress(categoria)}
+          style={{
+            backgroundColor:
+              categoria === activeCategory ? themeColors.green : themeColors.gray,
+            paddingHorizontal: 14,
+            paddingVertical: 6,
+            borderRadius: 999,
+            marginRight: 8,
+          }}
         >
-            {["Perfumes", "Electrónica", "Moda", "Hogar", 'ropa'].map((categoria, index, arr) => (
-                <TouchableOpacity
-                    key={index}
-                    style={{
-                        backgroundColor: themeColors.gray,
-                        paddingHorizontal: 12,
-                        paddingVertical: 5,
-                        borderRadius: 999,
-                        marginRight: index !== arr.length - 1 ? 8 : 0,
-                    }}
-                >
-                    <Text style={{ color: 'white' }}>{categoria}</Text>
-                </TouchableOpacity>
-            ))}
-        </ScrollView>
-    )
-}
+          <Text
+            style={{
+              color: categoria === activeCategory ? themeColors.text_icon_is_active : themeColors. text_icon_is_not_active, // Cambiar el color del texto
+              fontWeight:  categoria === activeCategory ? '700' : '500',
+            }}
+          >
+            {categoria}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
+};
 
-export default SelectionButton
+export default SelectionButton;

@@ -18,7 +18,7 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   const hideHeader = () => {
     Animated.timing(headerTranslateY, {
       toValue: -50,
-      duration: 300,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   };
@@ -26,7 +26,7 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   const showHeader = () => {
     Animated.timing(headerTranslateY, {
       toValue: 0,
-      duration: 1100,
+      duration: 900,
       useNativeDriver: true,
     }).start();
   };
