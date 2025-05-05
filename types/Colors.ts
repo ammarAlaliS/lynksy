@@ -4,6 +4,7 @@ import { ThemeColors } from "./ThemeColors";
 export const colors: { light: ThemeColors; dark: ThemeColors } = {
   light: {
     background: "#fff",
+    background_back: '#E3E3E3',
     border: 'rgba(128, 128, 128, 0.2)',
     backgroundMenu: '#706D54',
     flastlistColor: '#686D76',
@@ -17,9 +18,14 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     text_icon_is_active: '#fff',
     text_icon_is_not_active: '#fff',
 
+    // Title background
+    backgroundSection: '#fff',
+    text_general_title: '#111'
+
   },
   dark: {
     background: "#222",
+    background_back: '#111',
     border: 'rgba(128, 128, 128, 0.1)',
     backgroundMenu: '#030303',
     flastlistColor: '#090909',
@@ -32,6 +38,10 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
      // Icons 
     text_icon_is_active: '#222',
     text_icon_is_not_active: '#fff',
+
+    // Title background
+    backgroundSection: '#333',
+    text_general_title: '#fff'
    
   },
 };

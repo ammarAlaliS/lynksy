@@ -8,6 +8,7 @@ import { setIndex } from '@/store/slices/tabIndexSlice';
 import RenderScreen from '@/components/tab/RenderScreen';
 import { useGlobalStyles } from './global_screen_styles/Style_global';
 import { HeaderComponent } from '@/components/header/Header';
+import StoriesViewer from '@/components/Stories/StoriesViewer';
 
 const Index = () => {
 
@@ -22,9 +23,7 @@ const Index = () => {
       <View style={globalTabStyle.container}>
         <RenderScreen index={index} setIndex={setIndex} />
       </View>
-
-      {/* Barra de navegación inferior */}
-      <CustomTabBar index={index} setIndex={setIndex} />
+       <CustomTabBar index={index} setIndex={setIndex} />
     </View>
   );
 };

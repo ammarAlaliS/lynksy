@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, LayoutChangeEvent } from 'react-native';
 
-const initialCategories = ["Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
+const initialCategories = ["Todo","Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
 
 const SelectionButton = ({ themeColors }: any) => {
   const [activeCategory, setActiveCategory] = useState(initialCategories[0]);
@@ -16,7 +16,7 @@ const SelectionButton = ({ themeColors }: any) => {
   const handlePress = (category: string) => {
     setActiveCategory(category);
 
-    const buttonX = buttonPositions.current[category] || 0;
+    const buttonX = buttonPositions.current[category] || 10;
 
     // Scroll animado hasta la posición del botón
     scrollRef.current?.scrollTo({
@@ -32,6 +32,7 @@ const SelectionButton = ({ themeColors }: any) => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
         alignItems: 'center',
+        paddingLeft:10
       }}
     >
       {initialCategories.map((categoria) => (

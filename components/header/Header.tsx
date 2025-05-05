@@ -30,7 +30,6 @@ export const HeaderComponent = ({ themeColors }: any) => {
           flexDirection: 'column',
           borderBottomWidth: 1,
           borderColor: themeColors.border,
-          paddingHorizontal: 16,
           paddingVertical: 8,
           height: 100,
         }}
@@ -42,6 +41,7 @@ export const HeaderComponent = ({ themeColors }: any) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             height: 42,
+            paddingHorizontal:10
           }}
         >
           <HeaderLogo themeColors={themeColors} />

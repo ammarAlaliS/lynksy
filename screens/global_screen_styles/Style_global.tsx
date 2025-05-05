@@ -9,8 +9,8 @@ export const useGlobalStyles = () => {
   return  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: themeColors.background,
-      paddingTop:100
+      backgroundColor: themeColors.background_back,
+      paddingTop:52,
     },
     scene: {
       flex: 1,
