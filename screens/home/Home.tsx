@@ -11,6 +11,7 @@ import Icons from '@/components/Icon';
 import { Icon } from 'react-native-elements';
 import { ejemploRifas } from '@/constants/Rifles';
 import { useHeaderAnimation } from '@/context/HeaderAnimationContext';
+import Rifles_home_body from '@/components/home/Rifles_home_body';
 
 const Home = ({ setSwipeEnabled }: any) => {
   const GlobalStyles = useGlobalStyles();
@@ -26,65 +27,19 @@ const Home = ({ setSwipeEnabled }: any) => {
         backgroundColor: themeColors.background,
         zIndex: 10,
         position: 'absolute',
-        top: 50,
+        top: 48,
         left: 0,
         right: 0, 
         bottom:0,
         flexDirection: 'column',
         borderBottomWidth: 1,
         borderColor: themeColors.border,
-        paddingVertical: 8,
+    
       }}
     >
       <ScrollView>
         <StoriesViewer />
-        <View style={{
-
-          marginTop: 4,
-          marginBottom: 3,
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 10,
-          
-        }}>
-          <View style={{
-            paddingVertical: 10,
-            borderBottomWidth: 1,
-            borderColor: themeColors.border,
-            backgroundColor: themeColors.backgroundSection,
-            paddingHorizontal: 10
-          }}>
-            <GeneralTitle
-              icon={
-                <Icon
-                  name="spray-can"
-                  type="font-awesome-5"
-                  color={themeColors.white}
-                />
-              }
-              title={'Perfumes'}
-              themeColors={themeColors}
-              icon_two={
-                <Icons
-                  onPress={() => null}
-                  style={{
-                    backgroundColor: themeColors.green,
-                    width: 32,
-                    height: 32,
-                    borderRadius: 9999,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                  }}
-                  icon={<Icon name="chevron-right" color={themeColors.background} />}
-                />
-              }
-            />
-          </View>
-          <View style={{ paddingBottom: 10 }}>
-            <RifaCard ejemploRifas={ejemploRifas} />
-          </View>
-        </View>
+        <Rifles_home_body themeColors={themeColors}/>
       </ScrollView>
     </Animated.View>
   );
