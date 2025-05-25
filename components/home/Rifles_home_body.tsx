@@ -18,9 +18,9 @@ const Rifles_home_body = ({ themeColors }: any) => {
         >
           <View style={{
             paddingVertical: 10,
-            borderBottomWidth: 1,
+
             borderColor: themeColors.border,
-            backgroundColor: themeColors.backgroundSection,
+            backgroundColor: themeColors.background,
             paddingHorizontal: 10,
             
           }}>

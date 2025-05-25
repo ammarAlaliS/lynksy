@@ -20,7 +20,7 @@ const StoriesViewer = () => {
       height: 200,
       maxWidth: 600,
       alignSelf: 'center',
-      backgroundColor: themeColors.backgroundSection,
+      backgroundColor: themeColors.background,
       paddingVertical: 5,
     }}>
       <ScrollView

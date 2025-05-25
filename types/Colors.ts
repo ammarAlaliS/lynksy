@@ -24,7 +24,7 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
 
   },
   dark: {
-    background: "#222",
+    background: "#111",
     background_back: '#111',
     border: 'rgba(128, 128, 128, 0.1)',
     backgroundMenu: '#030303',
@@ -40,7 +40,7 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     text_icon_is_not_active: '#fff',
 
     // Title background
-    backgroundSection: '#333',
+    backgroundSection: '#444',
     text_general_title: '#fff'
    
   },

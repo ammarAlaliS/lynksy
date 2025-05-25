@@ -33,6 +33,8 @@ const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
   // Buscar la categoría que coincida
   const categoryData = homeDataByCategories.find(cat => cat.categoria.toLowerCase() === category.toLowerCase());
 
+  
+
   if (categoryData) {
     // Mapeamos de Rifa[] a Product[]
     const products: Product[] = categoryData.content.rifas.map(rifa => ({
@@ -40,9 +42,9 @@ const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
       name: rifa.titulo,
       price: rifa.precio,
       description: rifa.descripcion,
-      // agrega más campos si Product los tiene y puedes mapear
+      image: rifa.image
+     
     }));
-
     dispatch(setProducts(products));
   } else {
     dispatch(setProducts([])); // limpiar o manejar caso sin categoría
@@ -55,7 +57,7 @@ const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
     dispatch(addCategory(category));
     filterAndSetProductByCategory(category);
 
-    const buttonX = buttonPositions.current[category] || 10;
+    const buttonX = buttonPositions.current[category];
     scrollRef.current?.scrollTo({ x: buttonX, animated: true });
   }, [dispatch]);
 

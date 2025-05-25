@@ -32,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           flexDirection: "row",
           alignItems: "center",
           borderRadius: 9999,
-          backgroundColor: themeColors.background,
+          backgroundColor: themeColors.backgroundSection,
           borderWidth: 1,
           borderColor: themeColors.border,
         }}
@@ -40,8 +40,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <Icon
           name="search"
           size={20}
-          color={themeColors.text}
-          style={{ padding: 10 }}
+          color={themeColors.green}
+          style={{ padding: 8 , marginLeft:6}}
           onPress={onPressSearchIcon}
         />
 
@@ -49,12 +49,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
           style={{
             flex: 1,
             paddingVertical: 8,
-            paddingRight: 8,
+            paddingRight: 16,
             fontFamily: "PlusJakartaSans-SemiBold",
-            color: themeColors.text,
+            color: themeColors.white,
           }}
           placeholder="Busca por nombre o código"
-          placeholderTextColor={themeColors.text}
+          placeholderTextColor={themeColors.white}
           onChangeText={onChangeSearch}
           value={searchText}
           underlineColorAndroid="transparent"
@@ -65,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             style={{ paddingRight: 10 }}
             onPress={onClearSearch}
           >
-            <XMarkIcon color={themeColors.text} height={25} width={25} />
+            <XMarkIcon color={themeColors.white} height={25} width={25} />
           </TouchableOpacity>
         )}
       </View>

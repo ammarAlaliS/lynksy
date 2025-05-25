@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { selectTheme } from '@/store/slices/themeSlice';
 
 interface Rifa {
+  image: string | undefined;
   id: number;
   titulo: string;
   descripcion: string;
@@ -40,14 +41,14 @@ const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas, onPressDetalles }) =>
         style={[
           styles.cardContainer,
           {
-            backgroundColor: themeColors.backgroundSection,
+            backgroundColor: themeColors.background,
             borderColor: themeColors.border,
           },
         ]}
       >
         <View style={{ flex: 1 }}>
           <Image
-            source={{ uri: item.imagen }}
+            source={{ uri: item.image }}
             style={styles.image}
             resizeMode="cover"
           />
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 10,
     padding: 10,
-    borderWidth: 1,
     width: itemWidth,
     height: itemHeight,
     justifyContent: 'space-between',

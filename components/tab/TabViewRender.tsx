@@ -4,7 +4,6 @@ import { useGlobalStyles } from '@/screens/global_screen_styles/global_tab_style
 import MarketRoute from '@/screens/market/MarketRoute';
 import SavedRoute from '@/screens/save/SavedRoute';
 import SettingsRoute from '@/screens/setting/SettingsRoute';
-import { HomeRoute } from '@/StackNavigator';
 import * as React from 'react';
 import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
@@ -16,7 +15,6 @@ export default function TabViewExample() {
   const globalTabStyle = useGlobalStyles();
 
   const renderScene = SceneMap({
-    home: HomeRoute,
     saved: SavedRoute,
     market: MarketRoute,
     settings: SettingsRoute,
