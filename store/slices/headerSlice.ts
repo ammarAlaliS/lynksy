@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Animated } from 'react-native';
 
 interface HeaderState {
+  categories: any;
   showHeader: boolean;
   textTitle: string;
   showNotificationTitle: boolean;
@@ -13,6 +14,7 @@ const initialState: HeaderState = {
   showHeader: true,
   textTitle: '',
   showNotificationTitle: false,
+  categories: undefined
 };
 
 const headerSlice = createSlice({

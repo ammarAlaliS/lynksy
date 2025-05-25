@@ -273,11 +273,11 @@ export const homeDataByCategories: CategorySection[] = [
   },
   {
     id:'3',
-    categoria: "Electronica",
+    categoria: "Electrónica",
     headerInformation: {
       titleFirstIcon: "",
       titleFirstIconType: "",
-      title: "Electronica",
+      title: "Electrónica",
       titleSecondIcon: "",
       titleSecondIconType: "",
     },

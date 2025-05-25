@@ -3,6 +3,8 @@ import themeReducer from './slices/themeSlice';
 import headerReducer from './slices/headerSlice';
 import useAnimatedHeaderReducer from './slices/headerSlice';
 import tabIndexReducer from './slices/tabIndexSlice';
+import activeMenuReducer from './slices/activeMenuSlice';
+import productReducer from './slices/ProductSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     header: headerReducer,
     userAnimatedHeader: useAnimatedHeaderReducer,
     tabIndex: tabIndexReducer,
+    activeMenu: activeMenuReducer,
+    products: productReducer,
 
   },
 });

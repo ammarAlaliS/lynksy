@@ -14,7 +14,7 @@ export default function RenderScreen({ index, setIndex }: any) {
   const [swipeEnabled, setSwipeEnabled] = React.useState(false);
 
   const renderScene = SceneMap({
-    home: () => <Home setSwipeEnabled={setSwipeEnabled} />,
+    home: () => <Home />,
     saved: SavedRoute,
     market: MarketRoute,
     settings: SettingsRoute,

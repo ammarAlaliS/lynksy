@@ -1,10 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { ScrollView, Text, TouchableOpacity, LayoutChangeEvent } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '@/store/slices/activeMenuSlice';
+import { Product, setProducts } from '@/store/slices/ProductSlice';
+import { homeDataByCategories } from '@/constants/Rifles';
 
-const initialCategories = ["Todo","Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
+const initialCategories = ["Todo", "Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
 
-const SelectionButton = ({ themeColors }: any) => {
+interface ThemeColors {
+  green: string;
+  gray: string;
+  text_icon_is_active: string;
+  text_icon_is_not_active: string;
+}
+
+interface SelectionButtonProps {
+  themeColors: ThemeColors;
+}
+
+const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
   const [activeCategory, setActiveCategory] = useState(initialCategories[0]);
+  const dispatch = useDispatch();
   const scrollRef = useRef<ScrollView>(null);
   const buttonPositions = useRef<Record<string, number>>({});
 
@@ -13,27 +29,42 @@ const SelectionButton = ({ themeColors }: any) => {
     buttonPositions.current[category] = x;
   };
 
-  const handlePress = (category: string) => {
+  const filterAndSetProductByCategory = (category: string) => {
+  // Buscar la categoría que coincida
+  const categoryData = homeDataByCategories.find(cat => cat.categoria.toLowerCase() === category.toLowerCase());
+
+  if (categoryData) {
+    // Mapeamos de Rifa[] a Product[]
+    const products: Product[] = categoryData.content.rifas.map(rifa => ({
+      id: rifa.id,
+      name: rifa.titulo,
+      price: rifa.precio,
+      description: rifa.descripcion,
+      // agrega más campos si Product los tiene y puedes mapear
+    }));
+
+    dispatch(setProducts(products));
+  } else {
+    dispatch(setProducts([])); // limpiar o manejar caso sin categoría
+  }
+};
+
+
+  const handlePress = useCallback((category: string) => {
     setActiveCategory(category);
+    dispatch(addCategory(category));
+    filterAndSetProductByCategory(category);
 
     const buttonX = buttonPositions.current[category] || 10;
-
-    // Scroll animado hasta la posición del botón
-    scrollRef.current?.scrollTo({
-      x: buttonX,
-      animated: true,
-    });
-  };
+    scrollRef.current?.scrollTo({ x: buttonX, animated: true });
+  }, [dispatch]);
 
   return (
     <ScrollView
       ref={scrollRef}
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{
-        alignItems: 'center',
-        paddingLeft:10
-      }}
+      contentContainerStyle={{ alignItems: 'center',  marginHorizontal:10 }}
     >
       {initialCategories.map((categoria) => (
         <TouchableOpacity
@@ -41,8 +72,7 @@ const SelectionButton = ({ themeColors }: any) => {
           onLayout={handleLayout(categoria)}
           onPress={() => handlePress(categoria)}
           style={{
-            backgroundColor:
-              categoria === activeCategory ? themeColors.green : themeColors.gray,
+            backgroundColor: categoria === activeCategory ? themeColors.green : themeColors.gray,
             paddingHorizontal: 14,
             paddingVertical: 6,
             borderRadius: 999,
@@ -51,8 +81,11 @@ const SelectionButton = ({ themeColors }: any) => {
         >
           <Text
             style={{
-              color: categoria === activeCategory ? themeColors.text_icon_is_active : themeColors. text_icon_is_not_active, // Cambiar el color del texto
-              fontWeight:  categoria === activeCategory ? '700' : '500',
+              color:
+                categoria === activeCategory
+                  ? themeColors.text_icon_is_active
+                  : themeColors.text_icon_is_not_active,
+              fontWeight: categoria === activeCategory ? '700' : '700',
             }}
           >
             {categoria}
