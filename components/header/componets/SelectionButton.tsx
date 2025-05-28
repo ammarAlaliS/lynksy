@@ -1,9 +1,10 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { ScrollView, Text, TouchableOpacity, LayoutChangeEvent } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '@/store/slices/activeMenuSlice';
 import { Product, setProducts } from '@/store/slices/ProductSlice';
 import { homeDataByCategories } from '@/constants/Rifles';
+import { RootState } from '@/store';
 
 const initialCategories = ["Todo", "Perfumes", "Electrónica", "Moda", "Hogar", "Ropa"];
 
@@ -19,7 +20,8 @@ interface SelectionButtonProps {
 }
 
 const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
-  const [activeCategory, setActiveCategory] = useState(initialCategories[0]);
+  // const [activeCategory, setActiveCategory] = useState(initialCategories[0]);
+  const activeCategory  = useSelector((state: RootState) => state.activeMenu.selectedCategory);
   const dispatch = useDispatch();
   const scrollRef = useRef<ScrollView>(null);
   const buttonPositions = useRef<Record<string, number>>({});
@@ -53,7 +55,6 @@ const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
 
 
   const handlePress = useCallback((category: string) => {
-    setActiveCategory(category);
     dispatch(addCategory(category));
     filterAndSetProductByCategory(category);
 

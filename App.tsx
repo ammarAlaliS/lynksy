@@ -16,7 +16,6 @@ export default function RootLayout() {
           <StackNavigator />
         </NavigationContainer>
       </HeaderAnimationProvider>
-
     </Provider>
   );
 }

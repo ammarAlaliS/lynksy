@@ -11,7 +11,7 @@ import Home from '@/screens/home/Home';
 export default function RenderScreen({ index, setIndex }: any) {
   const layout = useWindowDimensions();
   const dispatch = useDispatch();
-  const [swipeEnabled, setSwipeEnabled] = React.useState(false);
+  const [swipeEnabled, setSwipeEnabled] = React.useState(true);
 
   const renderScene = SceneMap({
     home: () => <Home />,
@@ -25,7 +25,12 @@ export default function RenderScreen({ index, setIndex }: any) {
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
-        onIndexChange={(i) => dispatch(setIndex(i))}
+        onIndexChange={(i) => {
+           console.log(i)
+          console.log(routes)
+          dispatch(setIndex(i) )}
+        }
+        
         initialLayout={{ width: layout.width }}
         renderTabBar={() => null}
         swipeEnabled={swipeEnabled}

@@ -4,6 +4,7 @@ import { useGlobalStyles } from '@/screens/global_screen_styles/global_tab_style
 import MarketRoute from '@/screens/market/MarketRoute';
 import SavedRoute from '@/screens/save/SavedRoute';
 import SettingsRoute from '@/screens/setting/SettingsRoute';
+import { addCategory } from '@/store/slices/activeMenuSlice';
 import * as React from 'react';
 import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
@@ -20,6 +21,10 @@ export default function TabViewExample() {
     settings: SettingsRoute,
   });
 
+  function dispatch(arg0: any) {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <View style={globalTabStyle.container}>
       <TabView
@@ -34,7 +39,14 @@ export default function TabViewExample() {
           <TouchableOpacity
             key={route.key}
             style={globalTabStyle.tabItem}
-            onPress={() => setIndex(i)}
+            onPress={() => {
+              setIndex(i)
+              console.log(i)
+              console.log(route)
+              // if (i === 'Todos') {
+              //   dispatch(addCategory(i));
+              // }
+            }}
           >
             <Icon
               name={route.icon}

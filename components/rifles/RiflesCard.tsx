@@ -96,13 +96,13 @@ const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas, onPressDetalles }) =>
   mode="parallax"
   modeConfig={{
     parallaxScrollingScale: 0.95, // Escala del item activo
-    parallaxScrollingOffset: 60,  // Cuánto se alejan los items adyacentes
+    parallaxScrollingOffset: 70,  // Cuánto se alejan los items adyacentes
     parallaxAdjacentItemScale: 0.85, // Escala de los adyacentes
   }}
   style={{ alignSelf: 'center' }} // Opcional: asegura centrado visual
   defaultIndex={1} // Opcional: carga empezando con el segundo
-  loop={false}
-  autoPlay={false}
+  loop={true}
+  autoPlay={true}
   pagingEnabled={true}
 />
 
