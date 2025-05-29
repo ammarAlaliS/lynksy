@@ -10,6 +10,7 @@ import {
 import Carousel from 'react-native-reanimated-carousel';
 import { useSelector } from 'react-redux';
 import { selectTheme } from '@/store/slices/themeSlice';
+import { useNavigation } from '@react-navigation/native';
 
 interface Rifa {
   image: string | undefined;
@@ -25,15 +26,15 @@ interface Rifa {
 
 interface RifaCardProps {
   ejemploRifas: Rifa[];
-  onPressDetalles?: (rifa: Rifa) => void;
 }
 
 const { width: screenWidth } = Dimensions.get('window');
 const itemWidth = screenWidth * 0.90;
 const itemHeight = 440;
 
-const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas, onPressDetalles }) => {
+const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas }) => {
   const themeColors = useSelector(selectTheme);
+  const naginate = useNavigation();
 
   const renderItem = ({ item }: { item: Rifa }) => {
     return (
@@ -71,7 +72,17 @@ const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas, onPressDetalles }) =>
         </View>
 
         <TouchableOpacity
-          onPress={() => onPressDetalles?.(item)}
+          onPress={() => {
+            naginate.navigate("ProductDetails", {
+       image: item.image,
+              titulo: item.titulo,
+              descripcion: item.descripcion,
+              price: item.precio,
+              date: item.fechaSorteo,
+              available: item.numerosDisponibles
+            });
+          }}
+
           style={[styles.button, { backgroundColor: themeColors.green }]}
         >
           <Text
@@ -88,23 +99,23 @@ const RifaCard: React.FC<RifaCardProps> = ({ ejemploRifas, onPressDetalles }) =>
   };
 
   return (
-  <Carousel
-  width={screenWidth}
-  height={itemHeight}
-  data={ejemploRifas}
-  renderItem={renderItem}
-  mode="parallax"
-  modeConfig={{
-    parallaxScrollingScale: 0.95, // Escala del item activo
-    parallaxScrollingOffset: 70,  // Cuánto se alejan los items adyacentes
-    parallaxAdjacentItemScale: 0.85, // Escala de los adyacentes
-  }}
-  style={{ alignSelf: 'center' }} // Opcional: asegura centrado visual
-  defaultIndex={1} // Opcional: carga empezando con el segundo
-  loop={true}
-  autoPlay={true}
-  pagingEnabled={true}
-/>
+    <Carousel
+      width={screenWidth}
+      height={itemHeight}
+      data={ejemploRifas}
+      renderItem={renderItem}
+      mode="parallax"
+      modeConfig={{
+        parallaxScrollingScale: 0.95, // Escala del item activo
+        parallaxScrollingOffset: 70,  // Cuánto se alejan los items adyacentes
+        parallaxAdjacentItemScale: 0.85, // Escala de los adyacentes
+      }}
+      style={{ alignSelf: 'center' }} // Opcional: asegura centrado visual
+      defaultIndex={1} // Opcional: carga empezando con el segundo
+      loop={true}
+      autoPlay={false}
+      pagingEnabled={true}
+    />
 
   );
 };

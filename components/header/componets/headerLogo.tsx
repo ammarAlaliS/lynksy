@@ -1,13 +1,17 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { icons } from '@/constants/icons'
+import { useSelector } from 'react-redux'
+import { selectTheme } from '@/store/slices/themeSlice'
 
-const HeaderLogo = ({themeColors}: any) => {
+const HeaderLogo = () => {
+      const themeColors = useSelector(selectTheme);
     return (
         <View style={{
             display:'flex',
             flexDirection:'row',
-            alignItems:'center'
+            alignItems:'center',
+            paddingLeft:10
 
         }}>
             <Text

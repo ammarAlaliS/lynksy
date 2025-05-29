@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectTheme } from '@/store/slices/themeSlice';
 import { useHeaderAnimation } from '@/context/HeaderAnimationContext';
 import { RootState } from '@/store';
-import ItemList from '@/components/itemList/ItemList';
+import ItemList from '@/components/product/ItemList';
 
 const Home = () => {
   const GlobalStyles = useGlobalStyles();
@@ -28,11 +28,11 @@ const Home = () => {
         flex: 1,
         backgroundColor: themeColors.background,
         zIndex: 10,
-        position: 'absolute',
-        top: 48,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        // position: 'absolute',
+        // top: 48,
+        // left: 0,
+        // right: 0,
+        // bottom: 0,
         flexDirection: 'column',
         borderBottomWidth: 1,
         borderColor: themeColors.border,
