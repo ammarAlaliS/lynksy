@@ -4,7 +4,8 @@ import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native"
 type HeaderAnimationContextType = {
   headerTranslateY: Animated.Value;
   StoriesTranslateY: Animated.Value;
-  StoriesOpacity: Animated.Value;   // 👈 agregado
+  StoriesOpacity: Animated.Value;
+  HeaderOpacity: Animated.Value;
   hideHeader: () => void;
   showHeader: () => void;
   HideStories: () => void;
@@ -16,13 +17,23 @@ const HeaderAnimationContext = createContext<HeaderAnimationContextType | null>(
 export const HeaderAnimationProvider = ({ children }: { children: React.ReactNode }) => {
   const headerTranslateY = useRef(new Animated.Value(0)).current;
   const StoriesTranslateY = useRef(new Animated.Value(0)).current;
-  const StoriesOpacity = useRef(new Animated.Value(1)).current; // 👈 empieza visible
+  const StoriesOpacity = useRef(new Animated.Value(1)).current;
+  const HeaderOpacity = useRef(new Animated.Value(1)).current;
+
   const lastScrollY = useRef(0);
 
   const hideHeader = () => {
     Animated.timing(headerTranslateY, {
-      toValue: -0,
-      duration: 0,
+      toValue: -60,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const showHeader = () => {
+    Animated.timing(headerTranslateY, {
+      toValue: 0,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   };
@@ -30,58 +41,48 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   const HideStories = () => {
     Animated.parallel([
       Animated.timing(StoriesTranslateY, {
-        toValue: -50, // se ocultan hacia arriba
+        toValue: -150,
         duration: 600,
         useNativeDriver: true,
       }),
       Animated.timing(StoriesOpacity, {
-        toValue: 0, // desaparecen
+        toValue: 0,
         duration: 600,
         useNativeDriver: true,
       }),
     ]).start();
   };
 
-  const showHeader = () => {
-    Animated.timing(headerTranslateY, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentY = event.nativeEvent.contentOffset.y;
 
-    // limitamos entre 0 y 95
-    const clampedY = Math.min(Math.max(currentY, 0), 95);
+    // --- Stories ---
+    const storiesTranslate = Math.min(currentY, 150); // llega hasta -150
+    StoriesTranslateY.setValue(-storiesTranslate);
 
-    // movimiento hacia arriba
-    StoriesTranslateY.setValue(-clampedY);
-    // opacidad entre 1 → 0 (Instagram-like)
-    const opacity = 1 - clampedY / 50;
-    StoriesOpacity.setValue(opacity);
+    const storiesOpacity = currentY <= 95 ? 1 - currentY / 50 : 0;
+    StoriesOpacity.setValue(storiesOpacity);
+
+    // --- Header solo si scroll > 95 ---
+    if (currentY > 95) {
+      const headerClamped = Math.min(currentY - 95, 60); // comienza desde scroll = 95
+      headerTranslateY.setValue(-headerClamped);
+      HeaderOpacity.setValue(Math.max(1 - headerClamped / 60, 0));
+    } else {
+      headerTranslateY.setValue(0);
+      HeaderOpacity.setValue(1);
+    }
+
     lastScrollY.current = currentY;
-
-      //  if (clampedY === 95){
-      //     const headerClampeY = Math.min(Math.max(currentY, 0), 95);
-      //     headerTranslateY.setValue(-headerClampeY)
-      //     const opacity = 1 - headerClampeY / 50;
-      //     // StoriesOpacity.setValue(opacity);
-      //     lastScrollY.current = currentY;
-      //  }
   };
-  
-
-
-  
 
   return (
     <HeaderAnimationContext.Provider
       value={{
         headerTranslateY,
         StoriesTranslateY,
-        StoriesOpacity,   
+        StoriesOpacity,
+        HeaderOpacity,
         hideHeader,
         showHeader,
         handleScroll,

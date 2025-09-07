@@ -10,7 +10,7 @@ import { RootState } from "@/store";
 import { useHeaderAnimation } from "@/context/HeaderAnimationContext";
 
 export const HeaderComponent = ({ themeColors }: any) => {
-  const { headerTranslateY } = useHeaderAnimation();
+  const { headerTranslateY, HeaderOpacity } = useHeaderAnimation();
   const showNotificationTitle = useSelector(
     (state: RootState) => state.header.showNotificationTitle
   );
@@ -20,11 +20,12 @@ export const HeaderComponent = ({ themeColors }: any) => {
       style={{
         transform: [{ translateY: headerTranslateY }],
         position: "absolute",
+        opacity: HeaderOpacity,
         top: 0,
         left: 0,
         right: 0,
         backgroundColor: themeColors.background,
-        zIndex: 10,
+        zIndex: 20,
         display: "flex",
         flexDirection: "column",
         paddingVertical: 8,
