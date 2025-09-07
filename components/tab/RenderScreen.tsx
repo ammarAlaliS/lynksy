@@ -2,16 +2,18 @@ import React from 'react';
 import { useWindowDimensions, View } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { routes } from '@/routes/Routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MarketRoute from '@/screens/market/MarketRoute';
 import SavedRoute from '@/screens/save/SavedRoute';
 import SettingsRoute from '@/screens/setting/SettingsRoute';
 import Home from '@/screens/home/Home';
+import { selectTheme } from '@/store/slices/themeSlice';
 
 export default function RenderScreen({ index, setIndex }: any) {
   const layout = useWindowDimensions();
   const dispatch = useDispatch();
   const [swipeEnabled, setSwipeEnabled] = React.useState(true);
+   const themeColors = useSelector(selectTheme);
 
   const renderScene = SceneMap({
     home: () => <Home />,
@@ -21,7 +23,7 @@ export default function RenderScreen({ index, setIndex }: any) {
   });
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: themeColors.background}}>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}

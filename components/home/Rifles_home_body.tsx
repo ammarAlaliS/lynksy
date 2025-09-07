@@ -5,15 +5,17 @@ import { homeDataByCategories } from '@/constants/Rifles';
 import Home_title from './Home_title';
 
 const Rifles_home_body = ({ themeColors }: any) => {
+  
   return (
-    <View style={{ paddingBottom: 0 }}>
+    <View style={{ paddingBottom: 0, backgroundColor: themeColors.background, flex:1 }}>
       {homeDataByCategories.map((category) => (
         <View 
         key={category.id} 
         style={{ 
             display:'flex',
             flexDirection: 'column',
-            marginTop:5
+            marginTop:5,
+            backgroundColor: themeColors.background
         }}
         >
           <View style={{
@@ -33,7 +35,7 @@ const Rifles_home_body = ({ themeColors }: any) => {
               themeColors={themeColors}
             />
           </View>
-          <RifaCard ejemploRifas={category.content.rifas} />
+     
         </View>
       ))}
     </View>

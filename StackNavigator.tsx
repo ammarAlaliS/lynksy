@@ -1,109 +1,42 @@
 // StackNavigator.tsx
-
-import React, { useEffect } from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Icon } from 'react-native-elements';
-import { TouchableWithoutFeedback, View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { Icon } from "react-native-elements";
+import {
+  TouchableWithoutFeedback,
+  View,
+  Text,
+  SafeAreaView,
+} from "react-native";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 // Redux Theme
-import { selectTheme } from './store/slices/themeSlice';
+import { selectTheme } from "./store/slices/themeSlice";
 
 // Components
-import HeaderLogo from './components/header/componets/headerLogo';
-import MenuOptionRight from './components/header/MenuOptionRight';
+import HeaderLogo from "./components/header/componets/headerLogo";
+import MenuOptionRight from "./components/header/MenuOptionRight";
 
 // Screens
-import Home from './screens/home/Home';
-import Saved from './screens/Saved';
-import MarketRoute from './screens/market/MarketRoute';
-import ProductDetails from './screens/product_details/ProductDetails';
-import PerfumScreen from './screens/top_tap_screens/PerfumScreen';
-import ElectronicScreen from './screens/top_tap_screens/ElectronicScreen';
-import CategoryButton from './components/header/CategoryButtom';
+import Home from "./screens/home/Home";
+import Saved from "./screens/Saved";
+import MarketRoute from "./screens/market/MarketRoute";
+import ProductDetails from "./screens/product_details/ProductDetails";
+import PerfumScreen from "./screens/top_tap_screens/PerfumScreen";
+import ElectronicScreen from "./screens/top_tap_screens/ElectronicScreen";
+import FashionScreen from "./screens/top_tap_screens/FashionScreen";
+import HomeItemsScreen from "./screens/top_tap_screens/HomeItemsScreen";
+import NoticationScreen from "./screens/notification/NoticationScreen";
+import MessageScreen from "./screens/message/MessageScreen";
 
-// Top Tab
-const TopTab = createMaterialTopTabNavigator();
-
-import { useNavigationState } from '@react-navigation/native';
-import FashionScreen from './screens/top_tap_screens/FashionScreen';
-import HomeItemsScreen from './screens/top_tap_screens/HomeItemsScreen';
-import { homeDataByCategories } from './constants/Rifles';
-import { Product, setProducts } from './store/slices/ProductSlice';
-
-function HomeTopTabs() {
-  const dispatch = useDispatch();
-  const themeColors = useSelector(selectTheme);
-
-  // Obtener el nombre del tab activo dentro del TopTab
-  const activeTabRouteName = useNavigationState((state) => {
-    const tabState = state.routes.find(r => r.name === 'Home')?.state;
-    if (!tabState) return null;
-    return tabState.routes[tabState.index].name;
-  });
-
-  useEffect(() => {
-    if (!activeTabRouteName) return;
-
-    const categoryData = homeDataByCategories.find(
-      cat => cat.categoria.toLowerCase() === activeTabRouteName.toLowerCase()
-    );
-
-    if (categoryData) {
-      const products: Product[] = categoryData.content.rifas.map(rifa => ({
-        id: rifa.id,
-        name: rifa.titulo,
-        price: rifa.precio,
-        description: rifa.descripcion,
-        image: rifa.image,
-      }));
-      dispatch(setProducts(products));
-    } else {
-      dispatch(setProducts([]));
-    }
-  }, [activeTabRouteName, dispatch]);
-
-  // Función para evitar repetir lógica de tabBarLabel
-  const renderTabLabel = (categoria: string) => ({ focused }) =>
-    focused
-      ? <CategoryButton categoria={categoria} activeCategory={categoria} />
-      : <Text style={{ color: themeColors.white, fontWeight: '700' }}>{categoria}</Text>;
-
-  return (
-    <TopTab.Navigator
-      screenOptions={{
-        tabBarScrollEnabled: true,
-        tabBarStyle: {
-          backgroundColor: themeColors.background,
-        },
-        tabBarItemStyle: {
-          width: 'auto',
-          display: 'flex',
-        },
-        tabBarLabelStyle: {
-          fontSize: 14,
-          fontWeight: '700',
-          color: themeColors.white,
-        },
-        tabBarIndicatorStyle: {
-          height: 0,
-          width: 0,
-        },
-        tabBarPressColor: 'transparent',
-      }}
-    >
-      <TopTab.Screen name="Todos" component={Home} options={{ tabBarLabel: renderTabLabel('Todos') }} />
-      <TopTab.Screen name="Perfumes" component={PerfumScreen} options={{ tabBarLabel: renderTabLabel('Perfumes') }} />
-      <TopTab.Screen name="Electrónica" component={ElectronicScreen} options={{ tabBarLabel: renderTabLabel('Electrónica') }} />
-      <TopTab.Screen name="Moda" component={FashionScreen} options={{ tabBarLabel: renderTabLabel('Moda') }} />
-      <TopTab.Screen name="HomeItem" component={HomeItemsScreen} options={{ tabBarLabel: renderTabLabel('Hogar') }} />
-    </TopTab.Navigator>
-  );
-}
+// Otros
+import CategoryButton from "./components/header/CategoryButtom";
+import { homeDataByCategories } from "./constants/Rifles";
+import { Product, setProducts } from "./store/slices/ProductSlice";
 
 
 // Bottom Tabs
@@ -114,7 +47,7 @@ function BottomTabs() {
 
   const CustomTabBarButton = (props) => (
     <TouchableWithoutFeedback onPress={props.onPress}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         {props.children}
       </View>
     </TouchableWithoutFeedback>
@@ -124,39 +57,42 @@ function BottomTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size, focused }) => {
-          let iconName = '';
+          let iconName = "";
           switch (route.name) {
-            case 'Home':
-              iconName = focused ? 'home' : 'home-outline';
+            case "Home":
+              iconName = focused ? "home" : "home-outline";
               break;
-            case 'Saved':
-              iconName = focused ? 'bookmark' : 'bookmark-outline';
+            case "Saved":
+              iconName = focused ? "bookmark" : "bookmark-outline";
               break;
-            case 'Market':
-              iconName = focused ? 'cart' : 'cart-outline';
+            case "Market":
+              iconName = focused ? "cart" : "cart-outline";
               break;
-            case 'Settings':
-              iconName = focused ? 'settings' : 'settings-outline';
+            case "Perfil":
+              iconName = focused ? "settings" : "settings-outline";
               break;
             default:
-              iconName = 'ellipse-outline';
+              iconName = "ellipse-outline";
           }
-
-          return <Icon name={iconName} type="ionicon" size={size} color={color} />;
+          return (
+            <Icon name={iconName} type="ionicon" size={size} color={color} />
+          );
         },
         tabBarButton: (props) => <CustomTabBarButton {...props} />,
         tabBarStyle: {
-          height: 60,
           backgroundColor: themeColors.background,
           borderTopWidth: 0.2,
           borderColor: themeColors.border,
         },
         headerShown: false,
         tabBarActiveTintColor: themeColors.green,
-        tabBarInactiveTintColor: '#8e8e93',
+        tabBarInactiveTintColor: "#8e8e93",
+        sceneContainerStyle: {
+          backgroundColor: themeColors.background, // 👈 screens del Tab
+        },
       })}
     >
-      <Tab.Screen name="Home" component={HomeTopTabs} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Saved" component={Saved} />
       <Tab.Screen name="Market" component={MarketRoute} />
       <Tab.Screen
@@ -164,7 +100,13 @@ function BottomTabs() {
         options={{
           tabBarButton: (props) => (
             <TouchableWithoutFeedback onPress={() => navigation.openDrawer()}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Icon
                   name="settings-outline"
                   type="ionicon"
@@ -172,7 +114,7 @@ function BottomTabs() {
                   color={
                     props.accessibilityState?.selected
                       ? themeColors.green
-                      : '#8e8e93'
+                      : "#8e8e93"
                   }
                 />
                 <Text
@@ -180,10 +122,10 @@ function BottomTabs() {
                     fontSize: 10,
                     color: props.accessibilityState?.selected
                       ? themeColors.green
-                      : '#8e8e93',
+                      : "#8e8e93",
                   }}
                 >
-                  Settings
+                  Perfil
                 </Text>
               </View>
             </TouchableWithoutFeedback>
@@ -196,24 +138,42 @@ function BottomTabs() {
   );
 }
 
-// Stack (para navegación tipo modal o detalle)
+// Stack
 const Stack = createNativeStackNavigator();
 function HomeStack() {
+  const themeColors = useSelector(selectTheme);
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: { backgroundColor: themeColors.background }, // 👈 fondo del Stack
+      }}
+    >
+      <Stack.Screen
+        name="BottomTabs"
+        component={BottomTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={NoticationScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MessageScreen"
+        component={MessageScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetails}
-        options={{
-          presentation: 'formSheet',
-        }}
+        options={{ presentation: "formSheet" }}
       />
     </Stack.Navigator>
   );
 }
 
-// Drawer (navegador principal)
+// Drawer
 const Drawer = createDrawerNavigator();
 export function StackNavigator() {
   const themeColors = useSelector(selectTheme);
@@ -221,29 +181,28 @@ export function StackNavigator() {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         headerLeft: () => <HeaderLogo />,
         headerRight: () => <MenuOptionRight themeColors={themeColors} />,
-        headerTitle: '',
+        headerTitle: "",
         headerStyle: {
           backgroundColor: themeColors.background,
           height: 55,
           borderBottomWidth: 0,
-          elevation: 0, // Android
-          shadowOpacity: 0, // iOS
-          shadowOffset: {
-            height: 0,
-          },
+          elevation: 0,
+          shadowOpacity: 0,
+          shadowOffset: { height: 0 },
           shadowRadius: 0,
+        },
+        drawerStyle: {
+          backgroundColor: themeColors.background, // 👈 fondo del Drawer
+        },
+        sceneContainerStyle: {
+          backgroundColor: themeColors.background, // 👈 fondo de screens en Drawer
         },
       }}
     >
-
       <Drawer.Screen name="Home" component={HomeStack} />
     </Drawer.Navigator>
   );
 }
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-

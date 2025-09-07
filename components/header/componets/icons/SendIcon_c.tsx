@@ -35,7 +35,7 @@ const SendIcon_c = ({themeColors}: any) => {
             view={
                 <NotificationCounts
                     themeColors={themeColors.background}
-                    count={10}
+                    count={0}
                 />
             }
         />

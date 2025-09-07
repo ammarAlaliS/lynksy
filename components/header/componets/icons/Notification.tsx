@@ -42,7 +42,7 @@ const NotificationIcon = ({ themeColors }: Props) => {
         justifyContent: 'center',
         position: 'relative',
       }}
-      view={<NotificationCounts themeColors={themeColors.background} count={1} />}
+      view={<NotificationCounts themeColors={themeColors.background} count={0} />}
       icon={<Icon name="notifications" color={themeColors.background} />}
     />
   );

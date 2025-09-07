@@ -11,7 +11,7 @@ const HeaderLogo = () => {
             display:'flex',
             flexDirection:'row',
             alignItems:'center',
-            paddingLeft:10
+           
 
         }}>
             <Text
@@ -21,12 +21,8 @@ const HeaderLogo = () => {
                     lineHeight:36,
                     fontWeight:700
                 }}
-            >RifflesOne</Text>
-            <Image
-                source={icons.logo}
-                style={{ width: 36, height: 36 }}
-                resizeMode="contain"
-            />
+            >NicMarket</Text>
+            
         </View>
     )
 }

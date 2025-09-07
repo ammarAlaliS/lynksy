@@ -49,7 +49,7 @@ const SelectionButton: React.FC<SelectionButtonProps> = ({ themeColors }) => {
     }));
     dispatch(setProducts(products));
   } else {
-    dispatch(setProducts([])); // limpiar o manejar caso sin categoría
+    dispatch(setProducts([])); 
   }
 };
 

@@ -1,11 +1,12 @@
-
-import React, { createContext, useContext, useRef } from 'react';
-import { Animated, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import React, { createContext, useContext, useRef } from "react";
+import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 type HeaderAnimationContextType = {
   headerTranslateY: Animated.Value;
+  StoriesTranslateY: Animated.Value;
   hideHeader: () => void;
   showHeader: () => void;
+  HideStories: () => void;
   handleScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 };
 
@@ -13,12 +14,21 @@ const HeaderAnimationContext = createContext<HeaderAnimationContextType | null>(
 
 export const HeaderAnimationProvider = ({ children }: { children: React.ReactNode }) => {
   const headerTranslateY = useRef(new Animated.Value(0)).current;
+  const StoriesTranslateY = useRef(new Animated.Value(0)).current;
   const lastScrollY = useRef(0);
 
   const hideHeader = () => {
     Animated.timing(headerTranslateY, {
       toValue: -50,
-      duration: 100,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const HideStories = () => {
+    Animated.timing(StoriesTranslateY, {
+      toValue: -150, // ocultamos hasta -150
+      duration: 600,
       useNativeDriver: true,
     }).start();
   };
@@ -33,13 +43,12 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentY = event.nativeEvent.contentOffset.y;
-    const diff = currentY - lastScrollY.current;
 
-    if (diff > 5) {
-      hideHeader();
-    } else if (diff < -5) {
-      showHeader();
-    }
+    // limitamos entre 0 y 150
+    const clampedY = Math.min(Math.max(currentY, 0), 150);
+
+    // movemos hacia arriba
+    StoriesTranslateY.setValue(-clampedY);
 
     lastScrollY.current = currentY;
   };
@@ -48,9 +57,11 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
     <HeaderAnimationContext.Provider
       value={{
         headerTranslateY,
+        StoriesTranslateY,
         hideHeader,
         showHeader,
         handleScroll,
+        HideStories,
       }}
     >
       {children}
@@ -61,7 +72,7 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
 export const useHeaderAnimation = () => {
   const context = useContext(HeaderAnimationContext);
   if (!context) {
-    throw new Error('useHeaderAnimation must be used within a HeaderAnimationProvider');
+    throw new Error("useHeaderAnimation must be used within a HeaderAnimationProvider");
   }
   return context;
 };
