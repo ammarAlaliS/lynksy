@@ -1,7 +1,8 @@
 
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
-import { ProductCard, productos } from '@/components/Product'
+import ProductCard from './components/product/ProductCard'
+
 
 const HomeRiffles = ({handleScroll , themeColors }: any) => {
   return (

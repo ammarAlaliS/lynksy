@@ -4,6 +4,7 @@ import { Animated, NativeScrollEvent, NativeSyntheticEvent } from "react-native"
 type HeaderAnimationContextType = {
   headerTranslateY: Animated.Value;
   StoriesTranslateY: Animated.Value;
+  StoriesOpacity: Animated.Value;   // 👈 agregado
   hideHeader: () => void;
   showHeader: () => void;
   HideStories: () => void;
@@ -15,6 +16,7 @@ const HeaderAnimationContext = createContext<HeaderAnimationContextType | null>(
 export const HeaderAnimationProvider = ({ children }: { children: React.ReactNode }) => {
   const headerTranslateY = useRef(new Animated.Value(0)).current;
   const StoriesTranslateY = useRef(new Animated.Value(0)).current;
+  const StoriesOpacity = useRef(new Animated.Value(1)).current; // 👈 empieza visible
   const lastScrollY = useRef(0);
 
   const hideHeader = () => {
@@ -26,11 +28,18 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   };
 
   const HideStories = () => {
-    Animated.timing(StoriesTranslateY, {
-      toValue: -150, // ocultamos hasta -150
-      duration: 600,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(StoriesTranslateY, {
+        toValue: -50, // se ocultan hacia arriba
+        duration: 600,
+        useNativeDriver: true,
+      }),
+      Animated.timing(StoriesOpacity, {
+        toValue: 0, // desaparecen
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   const showHeader = () => {
@@ -44,11 +53,15 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentY = event.nativeEvent.contentOffset.y;
 
-    // limitamos entre 0 y 150
-    const clampedY = Math.min(Math.max(currentY, 0), 150);
+    // limitamos entre 0 y 50
+    const clampedY = Math.min(Math.max(currentY, 0), 100);
 
-    // movemos hacia arriba
+    // movimiento hacia arriba
     StoriesTranslateY.setValue(-clampedY);
+
+    // opacidad entre 1 → 0 (Instagram-like)
+    const opacity = 1 - clampedY / 50;
+    StoriesOpacity.setValue(opacity);
 
     lastScrollY.current = currentY;
   };
@@ -58,6 +71,7 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
       value={{
         headerTranslateY,
         StoriesTranslateY,
+        StoriesOpacity,   
         hideHeader,
         showHeader,
         handleScroll,

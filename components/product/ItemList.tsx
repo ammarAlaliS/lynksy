@@ -1,43 +1,24 @@
-import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
-import SearchBar from "../SearchComponent";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import ProductCard from "./ProductCard";
+import React from "react";
+import { ScrollView } from "react-native";
 import { useHeaderAnimation } from "@/context/HeaderAnimationContext";
 
-const ItemList = () => {
-  const [searchText, setSearchText] = useState("");
+type ScrollWrapperProps = {
+  children: React.ReactNode;
+};
 
-  const handleSearchChange = (text: string) => {
-    setSearchText(text);
-  };
-
-  const handleClearSearch = () => {
-    setSearchText("");
-  };
-
-  const handleSearchSubmit = () => {
-    console.log("Buscar:", searchText);
-  };
-
+const ScrollWrapper = ({ children }: ScrollWrapperProps) => {
   const { handleScroll } = useHeaderAnimation();
+
   return (
     <ScrollView
-      style={{ paddingHorizontal: 10, flex: 1 }}
+      style={{ flex: 1, paddingHorizontal: 10 }}
+      contentContainerStyle={{ paddingBottom: 100 }}
       scrollEventThrottle={16}
       onScroll={handleScroll}
     >
-      <SearchBar
-        searchText={searchText}
-        onChangeSearch={handleSearchChange}
-        onClearSearch={handleClearSearch}
-        onPressSearchIcon={handleSearchSubmit}
-      />
-
-      <ProductCard />
+      {children}
     </ScrollView>
   );
 };
 
-export default ItemList;
+export default ScrollWrapper;

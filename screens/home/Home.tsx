@@ -25,11 +25,10 @@ const Home = () => {
     (state: RootState) => state.activeMenu.selectedCategory
   );
 
-  const { headerTranslateY, StoriesTranslateY } = useHeaderAnimation();
+  const { headerTranslateY, StoriesTranslateY, StoriesOpacity } =
+    useHeaderAnimation();
 
   const [loading, setLoading] = useState(false);
-
-  const isTodoSelected = activeCategory.includes("Todo");
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: themeColors.background }}>
@@ -63,30 +62,39 @@ const Home = () => {
               </View>
             ) : (
               <>
-                {isTodoSelected ? (
-                  <>
-                    <HeaderComponent themeColors={themeColors} />
-                    <Animated.View
-                      style={{
-                        transform: [{ translateY: StoriesTranslateY }],
-                        flex: 1,
-                        backgroundColor: themeColors.background,
-                        zIndex: 0,
-                        position: 'absolute',
-                        top: 60,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                      }}
-                    >
-        
-                      <StoriesViewer />
-                      <HomeTopTabs />
-                    </Animated.View>
-                  </>
-                ) : (
-                  <ScrollBeheavior />
-                )}
+                <HeaderComponent themeColors={themeColors} />
+                <Animated.View
+                  style={{
+                    transform: [{ translateY: StoriesTranslateY }],
+                    backgroundColor: themeColors.background,
+                    flex: 1,
+                    zIndex: 0,
+                    position: "absolute",
+                    top: 60,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <Animated.View
+                    style={{
+                      opacity: StoriesOpacity,
+                    }}
+                  >
+                    <StoriesViewer />
+                  </Animated.View>
+                </Animated.View>
+                <Animated.View
+                  style={{
+                    flexGrow: 1,
+                    marginTop: 150,
+                    transform: [{ translateY: StoriesTranslateY }],
+                    height: "100%",
+                    paddingBottom: 100,
+                  }}
+                >
+                  <HomeTopTabs />
+                </Animated.View>
               </>
             )}
           </View>
