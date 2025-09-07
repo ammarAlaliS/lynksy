@@ -35,9 +35,10 @@ const Home = () => {
       <View style={{ flex: 1, backgroundColor: themeColors.background }}>
         <Animated.View
           style={{
-            transform: [{ translateY: headerTranslateY }],
+            // transform: [{ translateY: headerTranslateY }],
             flex: 1,
             backgroundColor: themeColors.background,
+            // opacity: StoriesOpacity,
 
             // position: 'absolute',
             // top: 48,
@@ -56,6 +57,7 @@ const Home = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   minHeight: 300,
+                  backgroundColor: themeColors.background,
                 }}
               >
                 <ActivityIndicator size="large" color={themeColors.green} />
@@ -79,6 +81,7 @@ const Home = () => {
                   <Animated.View
                     style={{
                       opacity: StoriesOpacity,
+                      backgroundColor: themeColors.background,
                     }}
                   >
                     <StoriesViewer />
@@ -91,6 +94,7 @@ const Home = () => {
                     transform: [{ translateY: StoriesTranslateY }],
                     height: "100%",
                     paddingBottom: 100,
+                    backgroundColor: themeColors.background,
                   }}
                 >
                   <HomeTopTabs />

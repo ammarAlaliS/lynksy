@@ -21,8 +21,8 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
 
   const hideHeader = () => {
     Animated.timing(headerTranslateY, {
-      toValue: -50,
-      duration: 600,
+      toValue: -0,
+      duration: 0,
       useNativeDriver: true,
     }).start();
   };
@@ -53,18 +53,28 @@ export const HeaderAnimationProvider = ({ children }: { children: React.ReactNod
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentY = event.nativeEvent.contentOffset.y;
 
-    // limitamos entre 0 y 50
-    const clampedY = Math.min(Math.max(currentY, 0), 100);
+    // limitamos entre 0 y 95
+    const clampedY = Math.min(Math.max(currentY, 0), 95);
 
     // movimiento hacia arriba
     StoriesTranslateY.setValue(-clampedY);
-
     // opacidad entre 1 → 0 (Instagram-like)
     const opacity = 1 - clampedY / 50;
     StoriesOpacity.setValue(opacity);
-
     lastScrollY.current = currentY;
+
+      //  if (clampedY === 95){
+      //     const headerClampeY = Math.min(Math.max(currentY, 0), 95);
+      //     headerTranslateY.setValue(-headerClampeY)
+      //     const opacity = 1 - headerClampeY / 50;
+      //     // StoriesOpacity.setValue(opacity);
+      //     lastScrollY.current = currentY;
+      //  }
   };
+  
+
+
+  
 
   return (
     <HeaderAnimationContext.Provider

@@ -37,6 +37,7 @@ import MessageScreen from "./screens/message/MessageScreen";
 import CategoryButton from "./components/header/CategoryButtom";
 import { homeDataByCategories } from "./constants/Rifles";
 import { Product, setProducts } from "./store/slices/ProductSlice";
+import SearchScreen from "./screens/search/SearchScreen";
 
 
 // Bottom Tabs
@@ -169,6 +170,7 @@ function HomeStack() {
         component={ProductDetails}
         options={{ presentation: "formSheet" }}
       />
+      <Stack.Screen name="Search" component={SearchScreen} options={{ headerShown: false, presentation: "formSheet" }} />
     </Stack.Navigator>
   );
 }
