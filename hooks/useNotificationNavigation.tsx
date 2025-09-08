@@ -7,15 +7,13 @@ import { useHeaderAnimation } from '@/context/HeaderAnimationContext';
 export const useNotificationNavigation = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { showHeader } = useHeaderAnimation();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('beforeRemove', () => {
-      showHeader();
       dispatch(setTextTitle(''));
       dispatch(setShowNotificationTitle(false));
     });
 
     return unsubscribe;
-  }, [navigation, dispatch, showHeader]);
+  }, [navigation, dispatch]);
 };

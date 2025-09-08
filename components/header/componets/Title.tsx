@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { JSX } from 'react'
 import { Icon } from 'react-native-elements'
 import Icons from '@/components/Icon'
 import { useNavigation } from '@react-navigation/native'

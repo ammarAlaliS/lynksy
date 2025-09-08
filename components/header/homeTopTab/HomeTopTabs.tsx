@@ -19,26 +19,35 @@ import Icons from "@/components/Icon";
 // Redux
 import { selectTheme } from "@/store/slices/themeSlice";
 import { useNavigation } from "@react-navigation/native";
+import { useHeaderAnimation } from "@/context/HeaderAnimationContext";
 
 const TopTab = createMaterialTopTabNavigator();
 
-
 const HomeTopTabs = () => {
   const themeColors = useSelector(selectTheme);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const { HideHeader, HideStories } = useHeaderAnimation();
 
   const renderTabLabel =
     (categoria: string) =>
-      ({ focused }: any) =>
-        focused ? (
-          <CategoryButton categoria={categoria} activeCategory={categoria} />
-        ) : (
-          <Text style={{ color: themeColors.white, fontWeight: "700" }}>
-            {categoria}
-          </Text>
-        );
+    ({ focused }: any) =>
+      focused ? (
+        <CategoryButton categoria={categoria} activeCategory={categoria} />
+      ) : (
+        <Text style={{ color: themeColors.white, fontWeight: "700" }}>
+          {categoria}
+        </Text>
+      );
 
   const SetParameter = () => <Rifles_home_body themeColors={themeColors} />;
+  
+const HandleAppAnimation = (activeScreen: string) => {
+  HideHeader();
+  HideStories();
+  console.log(`Pantalla activa: ${activeScreen}`);
+};
+
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -54,36 +63,50 @@ const HomeTopTabs = () => {
       >
         <TopTab.Screen
           name="Todos"
-          component={SetParameter}
+          listeners={{ focus: () => console.log("Pantalla activa: Todos") }}
           options={{ tabBarLabel: renderTabLabel("Todos") }}
-        />
+        >
+          {() => <SetParameter />}
+        </TopTab.Screen>
+
         <TopTab.Screen
           name="Perfumes"
-          component={PerfumScreen}
+          listeners={{ focus: () => HandleAppAnimation("perfume") }}
           options={{ tabBarLabel: renderTabLabel("Perfumes") }}
-        />
+        >
+          {() => <PerfumScreen />}
+        </TopTab.Screen>
+
         <TopTab.Screen
           name="Electrónica"
-          component={ElectronicScreen}
+          listeners={{ focus: () => HandleAppAnimation("Electrónica") }}
           options={{ tabBarLabel: renderTabLabel("Electrónica") }}
-        />
+        >
+          {() => <ElectronicScreen />}
+        </TopTab.Screen>
+
         <TopTab.Screen
           name="Moda"
-          component={FashionScreen}
+          listeners={{ focus: () => HandleAppAnimation("Moda") }}
           options={{ tabBarLabel: renderTabLabel("Moda") }}
-        />
+        >
+          {() => <FashionScreen />}
+        </TopTab.Screen>
+
         <TopTab.Screen
           name="HomeItem"
-          component={HomeItemsScreen}
+          listeners={{ focus: () => HandleAppAnimation("Hogar")}}
           options={{ tabBarLabel: renderTabLabel("Hogar") }}
-        />
+        >
+          {() => <HomeItemsScreen />}
+        </TopTab.Screen>
       </TopTab.Navigator>
 
       {/* Botón de búsqueda flotante */}
       <View
         style={{
           position: "absolute",
-          top: 5,
+          top: 3,
           right: 0,
           backgroundColor: themeColors.background,
           borderRadius: 9999,
@@ -91,7 +114,7 @@ const HomeTopTabs = () => {
         }}
       >
         <Icons
-     onPress={() => navigation.getParent()?.navigate("Search")}
+          onPress={() => navigation.getParent()?.navigate("Search")}
           style={{
             backgroundColor: themeColors.green,
             width: 36,
@@ -99,7 +122,7 @@ const HomeTopTabs = () => {
             borderRadius: 9999,
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 5
+            marginRight: 5,
           }}
           icon={
             <Icon
@@ -108,7 +131,7 @@ const HomeTopTabs = () => {
               solid={false}
               size={20}
               color={themeColors.background}
-              style={{ transform: [{ rotate: "0deg" }], marginBottom:2}}
+              style={{ transform: [{ rotate: "0deg" }], marginBottom: 2 }}
             />
           }
         />

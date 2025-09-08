@@ -5,17 +5,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import StatusBarWithTheme from "./components/statusBar";
 import { StackNavigator } from "./StackNavigator";
 import { HeaderAnimationProvider } from "./context/HeaderAnimationContext";
-
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { tokenCache } from '@clerk/clerk-expo/token-cache'
 
 export default function RootLayout() {
   return (
-    <Provider store={store}>
-      <HeaderAnimationProvider>
-        <StatusBarWithTheme />
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
-      </HeaderAnimationProvider>
-    </Provider>
+    <ClerkProvider tokenCache={tokenCache}>
+      <Provider store={store}>
+        <HeaderAnimationProvider>
+          <StatusBarWithTheme />
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </HeaderAnimationProvider>
+      </Provider>
+    </ClerkProvider>
   );
 }

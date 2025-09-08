@@ -12,10 +12,8 @@ import { setShowNotificationTitle, setTextTitle } from '@/store/slices/headerSli
 const SendIcon_c = ({themeColors}: any) => {
     const navigation = useNavigation<NavigationProp>();
     const dispatch = useDispatch();
-    const { hideHeader} = useHeaderAnimation();
   
     const handleOnPress = () => {
-      hideHeader();
       dispatch(setTextTitle('Mensajes'));
       dispatch(setShowNotificationTitle(true));
       navigation.navigate('MessageScreen'); 

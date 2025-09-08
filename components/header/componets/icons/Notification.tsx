@@ -19,10 +19,8 @@ interface Props {
 const NotificationIcon = ({ themeColors }: Props) => {
   const navigation = useNavigation<NavigationProp>();
   const dispatch = useDispatch();
-  const { hideHeader} = useHeaderAnimation();
 
   const handleOnPress = () => {
-    hideHeader();
     dispatch(setTextTitle('Notificaciones'));
     dispatch(setShowNotificationTitle(true));
     navigation.navigate('Notification'); 
