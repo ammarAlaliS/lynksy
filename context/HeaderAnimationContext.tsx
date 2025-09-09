@@ -9,6 +9,7 @@ type HeaderAnimationContextType = {
   HideHeader: () => void;
   ShowHeader: () => void;
   HideStories: () => void;
+  ShowStories: () => void;
 
   handleScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 };
@@ -69,9 +70,22 @@ const HideStories = () => {
   ]).start();
 };
 
-  const HandleAnimation = () => {
-    
-  }
+const ShowStories = () => {
+  Animated.parallel([
+    Animated.timing(StoriesTranslateY, {
+      toValue: 0,        // volver a la posición original
+      duration: 300,
+      useNativeDriver: true,
+    }),
+    Animated.timing(StoriesOpacity, {
+      toValue: 1,        // aparecer completamente
+      duration: 300,
+      useNativeDriver: true,
+    }),
+  ]).start();
+};
+
+
 
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -107,8 +121,8 @@ const HideStories = () => {
         handleScroll,
         HideStories,
         HideHeader,
-        ShowHeader
-   
+        ShowHeader,
+        ShowStories  
       }}
     >
       {children}

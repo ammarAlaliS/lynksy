@@ -20,13 +20,24 @@ import Icons from "@/components/Icon";
 import { selectTheme } from "@/store/slices/themeSlice";
 import { useNavigation } from "@react-navigation/native";
 import { useHeaderAnimation } from "@/context/HeaderAnimationContext";
+import { ResetScrollAnimation } from "@/context/ResetScrollAnimationContext";
 
 const TopTab = createMaterialTopTabNavigator();
 
 const HomeTopTabs = () => {
   const themeColors = useSelector(selectTheme);
   const navigation = useNavigation();
-  const { HideHeader, HideStories } = useHeaderAnimation();
+  const { 
+    HideHeader, 
+    HideStories, 
+    ShowHeader,
+    ShowStories,
+    headerTranslateY,
+    HeaderOpacity,
+    StoriesTranslateY,
+    StoriesOpacity
+
+  } = useHeaderAnimation();
 
   const renderTabLabel =
     (categoria: string) =>
@@ -47,6 +58,11 @@ const HandleAppAnimation = (activeScreen: string) => {
   console.log(`Pantalla activa: ${activeScreen}`);
 };
 
+const HandleShowAnimation = () =>{
+  ShowHeader()
+  ShowStories()
+  // ResetScrollAnimation({ headerTranslateY, HeaderOpacity, StoriesTranslateY, StoriesOpacity });
+}
 
 
   return (
@@ -63,7 +79,7 @@ const HandleAppAnimation = (activeScreen: string) => {
       >
         <TopTab.Screen
           name="Todos"
-          listeners={{ focus: () => console.log("Pantalla activa: Todos") }}
+          listeners={{ focus: () => HandleShowAnimation() }}
           options={{ tabBarLabel: renderTabLabel("Todos") }}
         >
           {() => <SetParameter />}

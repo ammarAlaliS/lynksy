@@ -34,7 +34,7 @@ const ScrollWrapper = ({ children, onRefresh }: ScrollWrapperProps) => {
           refreshing={refreshing}
           onRefresh={handleRefresh}
           tintColor={themeColors.black} 
-          colors={[themeColors.black]}
+          colors={[themeColors.black]} // color del circulito en Android
         />
       }
     >

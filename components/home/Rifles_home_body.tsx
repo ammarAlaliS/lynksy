@@ -3,7 +3,8 @@ import React from "react";
 import RifaCard from "../rifles/RiflesCard";
 import { homeDataByCategories } from "@/constants/Rifles";
 import Home_title from "./Home_title";
-import ScrollWrapper from "../product/ItemList";
+import ScrollWrapper from "@/utils/ScrollWrapper";
+
 
 const DefaultCategory = ({ themeColors }: any) => {
   return (

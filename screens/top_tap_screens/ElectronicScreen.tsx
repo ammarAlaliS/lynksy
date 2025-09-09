@@ -3,7 +3,7 @@ import React from 'react';
 import { selectTheme } from '@/store/slices/themeSlice';
 import { useSelector } from 'react-redux';
 import ProductCard from '@/components/product/ProductCard';
-import ScrollBeheavior from '@/components/product/ItemList';
+
 
 const ElectronicScreen = () => {
   const themeColors = useSelector(selectTheme);

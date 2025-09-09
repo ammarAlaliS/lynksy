@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { selectTheme } from "@/store/slices/themeSlice";
 import { useHeaderAnimation } from "@/context/HeaderAnimationContext";
 import { RootState } from "@/store";
-import ScrollBeheavior from "@/components/product/ItemList";
 import { HeaderComponent } from "@/components/header/Header";
 import { useNotificationNavigation } from "@/hooks/useNotificationNavigation";
 import HomeTopTabs from "@/components/header/homeTopTab/HomeTopTabs";
