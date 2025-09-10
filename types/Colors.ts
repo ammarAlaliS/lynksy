@@ -30,7 +30,7 @@ export const colors: { light: ThemeColors; dark: ThemeColors } = {
     backgroundMenu: '#030303',
     flastlistColor: '#090909',
     black:'#010101',
-    green: '#22c55e',
+    green: '#FFE797', //FFE797
     gray: '#555',
     white: '#fff',
     inactiveIconColor:'#666',

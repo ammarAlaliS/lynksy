@@ -39,36 +39,65 @@ const StoriesViewer = () => {
                 style={{
                   alignItems: "center",
                   width: 60,
-                  flex:1
-                 
+                  flex: 1,
+                  marginTop: 5,
+                  borderRadius: 9999,
                 }}
               >
                 <View
                   style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 30,
                     overflow: "hidden",
-                    justifyContent:'center',
-                    flex:1
-                   
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 9999,
                   }}
                 >
-                  <LinearGradient
-                   colors={[themeColors.green, themeColors.black]}
+                  <View
                     style={{
-                      flex: 1,
                       justifyContent: "center",
                       alignItems: "center",
-                      borderWidth:6,
-                      borderColor: themeColors.border,
-                      borderRadius: 30,
+                      borderWidth: 3,
+                      height: 50,
+                      width: 50,
+                      borderRadius: 9999,
+                      backgroundColor: themeColors.green,
+                      borderColor: themeColors.black,
                     }}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
                   >
-                    <Feather name="award" size={20} color="#fff" />
-                  </LinearGradient>
+                    <View>
+                      <Text
+                        style={{
+                          color: themeColors.background,
+                          fontWeight: "800",
+                        }}
+                      >
+                        5%
+                      </Text>
+                    </View>
+                    <View>
+                      <Text
+                        style={{
+                          color: themeColors.background,
+                          fontWeight: "800",
+                        }}
+                      >
+                        OFF
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      color: themeColors.green,
+                      fontWeight: "800",
+                      fontSize:10,
+                      marginTop:8
+                    }}
+                  numberOfLines={1}
+                  >
+                    Promotiomes
+                  </Text>
                 </View>
               </View>
             );
@@ -89,7 +118,7 @@ const StoriesViewer = () => {
                     height: 60,
                     borderRadius: 30,
                     borderWidth: 2,
-                    borderColor: story.seen ? "#a3a3a3" : themeColors.green,
+                    borderColor: story.seen ? "#a3a3a3" : themeColors.white,
                     justifyContent: "center",
                     alignItems: "center",
                   }}

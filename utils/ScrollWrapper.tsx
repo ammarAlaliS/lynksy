@@ -28,6 +28,7 @@ const ScrollWrapper = ({ children, onRefresh }: ScrollWrapperProps) => {
       style={{ flex: 1, paddingHorizontal: 10, backgroundColor: themeColors.background }}
       contentContainerStyle={{ paddingBottom: 100 }}
       scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
       refreshControl={
         <RefreshControl

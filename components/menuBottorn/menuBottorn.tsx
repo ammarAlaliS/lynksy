@@ -69,7 +69,7 @@ export default function BottomTabs() {
         },
         tabBarButton: (props) => <CustomTabBarButton {...props} />,
         tabBarStyle: {
-          backgroundColor: themeColors.gray,
+          backgroundColor: themeColors.background,
           borderTopWidth: 0.2,
           borderColor: themeColors.border,
           position: "absolute",
